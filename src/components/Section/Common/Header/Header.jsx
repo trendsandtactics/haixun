@@ -150,7 +150,7 @@ const Header = () => {
                                                 <div className="main-header-one__bottom-left">
                                                     <div className="navbar-wrap main-menu">
                                                         <ul className="navigation">
-                                                            <li className="active menu-item-has-children">
+                                                            <li className="active ">
                                                                 <Link href="/">Home</Link>
                                                             </li>
                                                             <li><Link href="about">About</Link></li>
