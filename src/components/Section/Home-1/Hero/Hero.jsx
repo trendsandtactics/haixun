@@ -39,7 +39,7 @@ const Hero = () => {
             <div
               className="image-layer"
               style={{ backgroundImage: "url(/img/slider/sustainability.jpg)" }}
-            ></div>
+            />
             <div className="big-title">
               <h2 style={{ color: COLORS.violet }}>Driving Sustainability</h2>
             </div>
@@ -54,8 +54,8 @@ const Hero = () => {
                     with smart innovation
                   </h2>
                   <p>
-                    We strive to reduce greenhouse gas emissions through products that build a balanced ecosystem.
-                    Our advanced technology enables full traceability — fully compliant with EU sustainability directives.
+                    We reduce greenhouse gas emissions through products that build a balanced ecosystem.
+                    Full traceability is enabled with technology in line with EU sustainability directives.
                   </p>
                   <div className="btn-box">
                     <Link
@@ -67,7 +67,7 @@ const Hero = () => {
                       }}
                     >
                       <span className="txt">Tracking</span>
-                      <i className="icon-right-arrow"></i>
+                      <i className="icon-right-arrow" />
                     </Link>
                   </div>
                 </div>
@@ -80,7 +80,7 @@ const Hero = () => {
             <div
               className="image-layer"
               style={{ backgroundImage: "url(/img/slider/feedstock.jpg)" }}
-            ></div>
+            />
             <div className="big-title">
               <h2 style={{ color: COLORS.violet }}>Biodiesel Feedstock</h2>
             </div>
@@ -95,9 +95,9 @@ const Hero = () => {
                     <span style={{ color: COLORS.teal }}>renewable energy</span>
                   </h2>
                   <p>
-                    We originate sustainable feedstocks using cutting-edge technology, skilled manpower,
-                    and a global logistics platform. Collected used cooking oil is processed and refined into
-                    high-quality biodiesel for greener energy solutions.
+                    We originate sustainable feedstocks using technology, skilled manpower, and a global
+                    logistics platform. Collected used cooking oil is processed and routed to bio-refineries
+                    to become clean biofuel.
                   </p>
                   <div className="btn-box">
                     <Link
@@ -109,7 +109,7 @@ const Hero = () => {
                       }}
                     >
                       <span className="txt">Tracking</span>
-                      <i className="icon-right-arrow"></i>
+                      <i className="icon-right-arrow" />
                     </Link>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ const Hero = () => {
             <div
               className="image-layer"
               style={{ backgroundImage: "url(/img/slider/trust.jpg)" }}
-            ></div>
+            />
             <div className="big-title">
               <h2 style={{ color: COLORS.violet }}>Trust</h2>
             </div>
@@ -137,9 +137,8 @@ const Hero = () => {
                     and strong partnerships
                   </h2>
                   <p>
-                    At Moltech, we treat our trading partners as a team — promoting collaboration,
-                    transparency, and strict quality control. Our ethics and reliability make us a
-                    globally trusted partner.
+                    We treat trading partners as a team—open communication, transparency, strong work
+                    ethics, and strict quality control—making Moltech a trusted partner worldwide.
                   </p>
                   <div className="btn-box">
                     <Link
@@ -151,7 +150,7 @@ const Hero = () => {
                       }}
                     >
                       <span className="txt">Learn More</span>
-                      <i className="icon-right-arrow"></i>
+                      <i className="icon-right-arrow" />
                     </Link>
                   </div>
                 </div>
@@ -160,29 +159,29 @@ const Hero = () => {
           </SwiperSlide>
         </div>
 
-        {/* Pagination & Nav */}
+        {/* Pagination & Nav (no TS cast here) */}
         <div
           className="swiper-pagination"
           id="main-slider-pagination"
           style={{
-            "--swiper-pagination-color": COLORS.teal,
-            "--swiper-pagination-bullet-inactive-color": "#ccc",
-          } as React.CSSProperties}
-        ></div>
+            ["--swiper-pagination-color"]: COLORS.teal,
+            ["--swiper-pagination-bullet-inactive-color"]: "#ccc",
+          }}
+        />
         <div className="main-slider__nav">
           <div
             className="swiper-button-prev"
             id="main-slider__swiper-button-prev"
             style={{ color: COLORS.teal }}
           >
-            <i className="fa fa-angle-left" aria-hidden="true"></i>
+            <i className="fa fa-angle-left" aria-hidden="true" />
           </div>
           <div
             className="swiper-button-next"
             id="main-slider__swiper-button-next"
             style={{ color: COLORS.teal }}
           >
-            <i className="fa fa-angle-right" aria-hidden="true"></i>
+            <i className="fa fa-angle-right" aria-hidden="true" />
           </div>
         </div>
       </Swiper>
