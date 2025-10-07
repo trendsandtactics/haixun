@@ -35,7 +35,7 @@ const Hero = () => {
             <div
               className="image-layer"
               style={{
-                backgroundImage: "url(/tank.jpg)",
+                backgroundImage: "url(/img/slider/sustainability.jpg)",
               }}
             ></div>
 
@@ -74,7 +74,7 @@ const Hero = () => {
             <div
               className="image-layer"
               style={{
-                backgroundImage: "url(/biodiesel.jpg)",
+                backgroundImage: "url(/img/slider/feedstock.jpg)",
               }}
             ></div>
 
@@ -114,7 +114,7 @@ const Hero = () => {
             <div
               className="image-layer"
               style={{
-                backgroundImage: "url(/trust.jpg)",
+                backgroundImage: "url(/img/slider/trust.jpg)",
               }}
             ></div>
 
