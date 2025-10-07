@@ -61,7 +61,7 @@ const Hero = () => {
                     product
                   </h2>
                   <p>
-                    With more than 30 years of experience in the logistics
+                    With more than 3 years of experience in the logistics
                     industry <br />
                     bibendum auctor nisi elit more consequat ipsum.
                   </p>
