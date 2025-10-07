@@ -8,6 +8,8 @@ const BRAND = {
   green: "#2DBB7A",
   purple: "#4B3DBB",
   dark: "#0E0F2C",
+  navy: "#1a365d",
+  gold: "#FDB913",
 };
 
 const activeNavStyle = {
@@ -18,7 +20,6 @@ const activeNavStyle = {
 
 const HeaderFour = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [home, setHome] = useState(false);
   const [service, setService] = useState(false);
   const [page, setPage] = useState(false);
   const [blog, setBlog] = useState(false);
@@ -51,249 +52,298 @@ const HeaderFour = () => {
   const QUOTE_NUMBER = "+70 264 566 579";
 
   return (
-    <header className="main-header main-header-two style4" style={{ background: "#fff", position: "relative", top: 0, left: 0, right: 0, zIndex: 9999, boxShadow: "0 2px 10px rgba(0,0,0,0.05)" }}>
-      <div id="sticky-header" className={`menu-area ${scrollClassName}`} style={{ background: "#fff", minHeight: "70px" }}>
-        <div className="main-header-two__outer" style={{ background: "#fff", paddingTop: 0, paddingBottom: 0, display: "flex", alignItems: "center", height: "70px" }}>
-          {/* Logo */}
-          <div className="logo-box-two" style={{ paddingRight: 16, paddingLeft: 16, display: "flex", alignItems: "center", background: "transparent", height: "70px", position: "relative", zIndex: 10 }}>
-            <Link href="/" aria-label="Home" style={{ display: "flex", alignItems: "center", height: "100%", background: "transparent" }}>
-              <img
-                src="/img/resource/logo-6.png"
-                alt="Translo"
-                style={{ height: "45px", width: "auto", objectFit: "contain" }}
-              />
-            </Link>
+    <>
+      {/* Top Bar */}
+      <div style={{ 
+        background: "#fff", 
+        borderBottom: "1px solid #e5e7eb",
+        padding: "8px 0"
+      }}>
+        <div style={{ 
+          maxWidth: "1400px", 
+          margin: "0 auto", 
+          padding: "0 20px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          fontSize: "13px",
+          color: "#6b7280"
+        }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span>A venture of</span>
+            <img src="/img/resource/logo-6.png" alt="Global" style={{ height: "20px" }} />
+            <span>Enterprises, Singapore</span>
           </div>
-
-          <div className="menu-area__inner">
-            <div className="mobile-nav-toggler" onClick={mobileMenuOpen}>
-              <i className="fas fa-bars"></i>
-            </div>
-
-            <div className="menu-wrap" style={{ width: "100%" }}>
-              <nav className="menu-nav" style={{ width: "100%" }}>
-                <div className="main-header-two__inner" style={{ width: "100%" }}>
-                  {/* Clean white navbar */}
-                  <div className="main-header-two__bottom" style={{ borderTop: "none", background: "#fff" }}>
-                    <div className="main-header-two__bottom-left">
-                      <div className="navbar-wrap main-menu">
-                        <ul className="navigation">
-                          <li className={currentPath === "/" ? "active" : ""}>
-                            <Link href="/" style={currentPath === "/" ? activeNavStyle : {}}>Home</Link>
-                          </li>
-
-                          <li className={currentPath === "/about" ? "active" : ""}>
-                            <Link href="/about" style={currentPath === "/about" ? activeNavStyle : {}}>About</Link>
-                          </li>
-
-                          <li
-                            className={
-                              currentPath === "/services" ||
-                              currentPath === "/road-transport" ||
-                              currentPath === "/air-transport" ||
-                              currentPath === "/cargo-transport" ||
-                              currentPath === "/ocean-freight" ||
-                              currentPath === "/rail-transport" ||
-                              currentPath === "/warehousing"
-                                ? "active menu-item-has-children"
-                                : "menu-item-has-children"
-                            }
-                          >
-                            <Link 
-                              href="#" 
-                              style={
-                                currentPath === "/services" ||
-                                currentPath === "/road-transport" ||
-                                currentPath === "/air-transport" ||
-                                currentPath === "/cargo-transport" ||
-                                currentPath === "/ocean-freight" ||
-                                currentPath === "/rail-transport" ||
-                                currentPath === "/warehousing"
-                                  ? activeNavStyle 
-                                  : {}
-                              }
-                            >
-                              Services
-                            </Link>
-                            <ul className="sub-menu">
-                              <li><Link href="/services" className={currentPath === "/services" ? "active" : ""}>Services</Link></li>
-                              <li><Link href="/road-transport" className={currentPath === "/road-transport" ? "active" : ""}>Road Transport</Link></li>
-                              <li><Link href="/air-transport" className={currentPath === "/air-transport" ? "active" : ""}>Air Transport</Link></li>
-                              <li><Link href="/cargo-transport" className={currentPath === "/cargo-transport" ? "active" : ""}>Cargo Transport</Link></li>
-                              <li><Link href="/ocean-freight" className={currentPath === "/ocean-freight" ? "active" : ""}>Ocean Freight</Link></li>
-                              <li><Link href="/rail-transport" className={currentPath === "/rail-transport" ? "active" : ""}>Rail Transport</Link></li>
-                              <li><Link href="/warehousing" className={currentPath === "/warehousing" ? "active" : ""}>Warehousing</Link></li>
-                            </ul>
-                          </li>
-
-                          <li
-                            className={
-                              currentPath &&
-                              (currentPath.startsWith("/team") ||
-                                currentPath.startsWith("/projects") ||
-                                currentPath.startsWith("/error"))
-                                ? "active menu-item-has-children"
-                                : "menu-item-has-children"
-                            }
-                          >
-                            <Link 
-                              href="#"
-                              style={
-                                currentPath &&
-                                (currentPath.startsWith("/team") ||
-                                  currentPath.startsWith("/projects") ||
-                                  currentPath.startsWith("/error"))
-                                  ? activeNavStyle 
-                                  : {}
-                              }
-                            >
-                              Pages
-                            </Link>
-                            <ul className="sub-menu">
-                              <li><Link href="/team" className={currentPath === "/team" ? "active" : ""}>Team</Link></li>
-                              <li><Link href="/team-details" className={currentPath === "/team-details" ? "active" : ""}>Team Details</Link></li>
-                              <li><Link href="/projects" className={currentPath === "/projects" ? "active" : ""}>Projects</Link></li>
-                              <li><Link href="/project-details" className={currentPath === "/project-details" ? "active" : ""}>Project Details</Link></li>
-                              <li><Link href="/error" className={currentPath === "/error" ? "active" : ""}>404</Link></li>
-                            </ul>
-                          </li>
-
-                          <li
-                            className={
-                              currentPath && currentPath.startsWith("/blog")
-                                ? "active menu-item-has-children"
-                                : "menu-item-has-children"
-                            }
-                          >
-                            <Link 
-                              href="#"
-                              style={
-                                currentPath && currentPath.startsWith("/blog")
-                                  ? activeNavStyle 
-                                  : {}
-                              }
-                            >
-                              Blog
-                            </Link>
-                            <ul className="sub-menu">
-                              <li><Link href="/blog" className={currentPath === "/blog" ? "active" : ""}>Blog</Link></li>
-                              <li><Link href="/blog-standard" className={currentPath === "/blog-standard" ? "active" : ""}>Blog standard</Link></li>
-                              <li><Link href="/blog-details" className={currentPath === "/blog-details" ? "active" : ""}>Blog Details</Link></li>
-                            </ul>
-                          </li>
-
-                          <li className={currentPath === "/contact" ? "active" : ""}>
-                            <Link href="/contact" style={currentPath === "/contact" ? activeNavStyle : {}}>Contact</Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <div className="main-header-two__bottom-right" style={{ gap: 14 }}>
-                      <Link
-                        href="tel:+70264566579"
-                        className="btn-box"
-                        style={{
-                          padding: "12px 18px",
-                          borderRadius: 999,
-                          background: `linear-gradient(90deg, ${BRAND.purple} 0%, ${BRAND.green} 60%, ${BRAND.teal} 100%)`,
-                          color: "#fff",
-                          fontWeight: 700,
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        Get a Free Quote: {QUOTE_NUMBER}
-                        <span className="icon-right-arrow" style={{ marginLeft: 8 }}></span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </nav>
-            </div>
-          </div>
-
-          {/* Mobile Menu */}
-          <div className={`mobile-menu ${mobileMenu ? "mobile-menu-open" : ""}`}>
-            <nav className="menu-box">
-              <div className={`close-btn ${mobileMenu ? "rotate" : ""}`} onClick={mobileMenuClose}>
-                <i className="fas fa-times"></i>
-              </div>
-              <div className="nav-logo" style={{ display: "flex", alignItems: "center" }}>
-                <Link href="/" aria-label="Home">
-                  <img src="/img/resource/mobile-menu-logo3.png" alt="Translo Mobile" style={{ height: 54, width: "auto" }} />
-                </Link>
-              </div>
-              <div className="menu-outer">
-                <ul className="navigation">
-                  <li className="active menu-item-has-children">
-                    <Link href="#">Home</Link>
-                    <ul className={`sub-menu ${home ? "sub-menu-visible test" : "sub-menu-hidden"}`}>
-                      <li style={{ borderTop: "1px solid #0000001a" }}><Link href="/">Home One</Link></li>
-                      <li style={{ borderTop: "1px solid #0000001a" }}><Link href="home-2">Home Two</Link></li>
-                      <li style={{ borderTop: "1px solid #0000001a" }}><Link href="home-3">Home Three</Link></li>
-                    </ul>
-                    <div className="dropdown-btn" onClick={() => setHome(!home)}><span className="fas fa-angle-down"></span></div>
-                  </li>
-
-                  <li style={{ marginTop: home ? "0px" : "-134px", zIndex: home ? "999" : "", transition: "0.3s linear" }}>
-                    <Link href="about">About</Link>
-                  </li>
-
-                  <li className="menu-item-has-children">
-                    <Link href="#">Services</Link>
-                    <ul className="sub-menu">
-                      <li><Link href="services">Services</Link></li>
-                      <li><Link href="road-transport">Road Transport</Link></li>
-                      <li><Link href="air-transport">Air Transport</Link></li>
-                      <li><Link href="cargo-transport">Cargo Transport</Link></li>
-                      <li><Link href="ocean-freight">Ocean Freight</Link></li>
-                      <li><Link href="rail-transport">Rail Transport</Link></li>
-                      <li><Link href="warehousing">Warehousing</Link></li>
-                    </ul>
-                    <div className="dropdown-btn" onClick={serviceHandler}><span className="fas fa-angle-down"></span></div>
-                  </li>
-
-                  <li className="menu-item-has-children" style={{ marginTop: service ? "0px" : "-314px", zIndex: service ? "0" : "999", transition: "0.3s linear" }}>
-                    <Link href="#">Pages</Link>
-                    <ul className="sub-menu">
-                      <li><Link href="team">Team</Link></li>
-                      <li><Link href="team-details">Team Details</Link></li>
-                      <li><Link href="projects">Projects</Link></li>
-                      <li><Link href="project-details">Project Details</Link></li>
-                      <li><Link href="error">404</Link></li>
-                    </ul>
-                    <div className="dropdown-btn" onClick={pageHandler}><span className="fas fa-angle-down"></span></div>
-                  </li>
-
-                  <li className="menu-item-has-children" style={{ marginTop: page ? "0px" : "-224px", zIndex: page ? "0" : "99999", transition: "0.3s linear" }}>
-                    <Link href="#">Blog</Link>
-                    <ul className="sub-menu" style={{ opacity: blog ? "1" : "0" }}>
-                      <li><Link href="blog">Blog</Link></li>
-                      <li><Link href="blog-standard">Blog standard</Link></li>
-                      <li><Link href="blog-details">Blog Details</Link></li>
-                    </ul>
-                    <div className="dropdown-btn" onClick={() => setBlog(!blog)}><span className="fas fa-angle-down"></span></div>
-                  </li>
-
-                  <li style={{ marginTop: blog ? "0px" : "-134px", zIndex: "99999", transition: "0.3s linear" }}>
-                    <Link href="contact">Contact</Link>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="contact-info" style={{ backgroundColor: "white", zIndex: 99999 }}>
-                <div className="icon-box"><span className="icon-right-arrow"></span></div>
-                <p><Link href="tel:+70264566579">Get a Free Quote: {QUOTE_NUMBER}</Link></p>
-              </div>
-            </nav>
-          </div>
-
-          <div className={`${mobileMenu ? "menu-backdrop" : ""}`} onClick={mobileMenuClose}></div>
-          {isOverlayActive && <div className="overlay" onClick={mobileMenuClose}></div>}
         </div>
       </div>
-    </header>
+
+      {/* Main Header */}
+      <header style={{ 
+        background: "#fff", 
+        borderBottom: "1px solid #e5e7eb",
+        position: "sticky",
+        top: 0,
+        zIndex: 1000,
+        boxShadow: scrollClassName ? "0 2px 10px rgba(0,0,0,0.08)" : "none",
+        transition: "box-shadow 0.3s ease"
+      }}>
+        <div style={{ 
+          maxWidth: "1400px", 
+          margin: "0 auto", 
+          padding: "0 20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: "70px"
+        }}>
+          {/* Logo */}
+          <Link href="/" aria-label="Home" style={{ display: "flex", alignItems: "center" }}>
+            <img
+              src="/img/resource/logo-6.png"
+              alt="Translo"
+              style={{ height: "50px", width: "auto" }}
+            />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav style={{ display: "flex", alignItems: "center", gap: "32px" }} className="desktop-nav">
+            <Link 
+              href="/" 
+              style={{ 
+                textDecoration: "none", 
+                color: currentPath === "/" ? BRAND.teal : BRAND.dark,
+                fontWeight: currentPath === "/" ? 600 : 500,
+                fontSize: "15px",
+                transition: "color 0.3s ease"
+              }}
+            >
+              Home
+            </Link>
+
+            <Link 
+              href="/about" 
+              style={{ 
+                textDecoration: "none", 
+                color: currentPath === "/about" ? BRAND.teal : BRAND.dark,
+                fontWeight: currentPath === "/about" ? 600 : 500,
+                fontSize: "15px",
+                transition: "color 0.3s ease"
+              }}
+            >
+              About Us
+            </Link>
+
+            <div style={{ position: "relative" }} className="dropdown-parent">
+              <Link 
+                href="/services" 
+                style={{ 
+                  textDecoration: "none", 
+                  color: currentPath?.includes("/services") || currentPath?.includes("-transport") || currentPath?.includes("warehousing") ? BRAND.teal : BRAND.dark,
+                  fontWeight: currentPath?.includes("/services") ? 600 : 500,
+                  fontSize: "15px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px"
+                }}
+              >
+                Services
+                <span style={{ fontSize: "10px" }}>▼</span>
+              </Link>
+            </div>
+
+            <div style={{ position: "relative" }} className="dropdown-parent">
+              <Link 
+                href="/projects" 
+                style={{ 
+                  textDecoration: "none", 
+                  color: currentPath?.includes("/team") || currentPath?.includes("/project") || currentPath?.includes("/error") ? BRAND.teal : BRAND.dark,
+                  fontWeight: currentPath?.includes("/team") || currentPath?.includes("/project") ? 600 : 500,
+                  fontSize: "15px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px"
+                }}
+              >
+                Pages
+                <span style={{ fontSize: "10px" }}>▼</span>
+              </Link>
+            </div>
+
+            <Link 
+              href="/blog" 
+              style={{ 
+                textDecoration: "none", 
+                color: currentPath?.includes("/blog") ? BRAND.teal : BRAND.dark,
+                fontWeight: currentPath?.includes("/blog") ? 600 : 500,
+                fontSize: "15px",
+                transition: "color 0.3s ease"
+              }}
+            >
+              Blog
+            </Link>
+
+            <Link 
+              href="/contact" 
+              style={{ 
+                textDecoration: "none", 
+                color: currentPath === "/contact" ? BRAND.teal : BRAND.dark,
+                fontWeight: currentPath === "/contact" ? 600 : 500,
+                fontSize: "15px",
+                transition: "color 0.3s ease"
+              }}
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Right Side Buttons */}
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            {/* Switch Country Button */}
+            <button style={{
+              background: BRAND.navy,
+              color: "#fff",
+              border: "none",
+              borderRadius: "6px",
+              padding: "10px 20px",
+              fontSize: "14px",
+              fontWeight: 600,
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              cursor: "pointer",
+              transition: "background 0.3s ease"
+            }}>
+              <span style={{ fontSize: "18px" }}>🌐</span>
+              Switch Country
+              <span style={{ fontSize: "10px" }}>▼</span>
+            </button>
+
+            {/* Contact/Quote Button */}
+            <Link
+              href="/contact"
+              style={{
+                background: BRAND.gold,
+                color: BRAND.dark,
+                border: "none",
+                borderRadius: "6px",
+                padding: "10px 24px",
+                fontSize: "14px",
+                fontWeight: 700,
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                whiteSpace: "nowrap",
+                transition: "transform 0.2s ease, box-shadow 0.3s ease",
+                boxShadow: "0 2px 8px rgba(253, 185, 19, 0.3)"
+              }}
+            >
+              Contact / Quote
+            </Link>
+
+            {/* Mobile Menu Toggle */}
+            <div 
+              className="mobile-nav-toggler" 
+              onClick={mobileMenuOpen}
+              style={{
+                display: "none",
+                cursor: "pointer",
+                fontSize: "24px",
+                color: BRAND.dark
+              }}
+            >
+              <i className="fas fa-bars"></i>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        <div className={`mobile-menu ${mobileMenu ? "mobile-menu-open" : ""}`}>
+          <nav className="menu-box">
+            <div className={`close-btn ${mobileMenu ? "rotate" : ""}`} onClick={mobileMenuClose}>
+              <i className="fas fa-times"></i>
+            </div>
+            <div className="nav-logo" style={{ display: "flex", alignItems: "center", padding: "20px" }}>
+              <Link href="/" aria-label="Home">
+                <img src="/img/resource/logo-6.png" alt="Translo Mobile" style={{ height: 50, width: "auto" }} />
+              </Link>
+            </div>
+            <div className="menu-outer">
+              <ul className="navigation">
+                <li><Link href="/">Home</Link></li>
+                <li><Link href="/about">About Us</Link></li>
+                <li className="menu-item-has-children">
+                  <Link href="#">Services</Link>
+                  <ul className="sub-menu">
+                    <li><Link href="/services">Services</Link></li>
+                    <li><Link href="/road-transport">Road Transport</Link></li>
+                    <li><Link href="/air-transport">Air Transport</Link></li>
+                    <li><Link href="/cargo-transport">Cargo Transport</Link></li>
+                    <li><Link href="/ocean-freight">Ocean Freight</Link></li>
+                    <li><Link href="/rail-transport">Rail Transport</Link></li>
+                    <li><Link href="/warehousing">Warehousing</Link></li>
+                  </ul>
+                  <div className="dropdown-btn" onClick={serviceHandler}><span className="fas fa-angle-down"></span></div>
+                </li>
+                <li className="menu-item-has-children">
+                  <Link href="#">Pages</Link>
+                  <ul className="sub-menu">
+                    <li><Link href="/team">Team</Link></li>
+                    <li><Link href="/team-details">Team Details</Link></li>
+                    <li><Link href="/projects">Projects</Link></li>
+                    <li><Link href="/project-details">Project Details</Link></li>
+                    <li><Link href="/error">404</Link></li>
+                  </ul>
+                  <div className="dropdown-btn" onClick={pageHandler}><span className="fas fa-angle-down"></span></div>
+                </li>
+                <li className="menu-item-has-children">
+                  <Link href="#">Blog</Link>
+                  <ul className="sub-menu">
+                    <li><Link href="/blog">Blog</Link></li>
+                    <li><Link href="/blog-standard">Blog standard</Link></li>
+                    <li><Link href="/blog-details">Blog Details</Link></li>
+                  </ul>
+                  <div className="dropdown-btn" onClick={() => setBlog(!blog)}><span className="fas fa-angle-down"></span></div>
+                </li>
+                <li><Link href="/contact">Contact</Link></li>
+              </ul>
+            </div>
+            <div className="contact-info" style={{ backgroundColor: "white", padding: "20px" }}>
+              <Link href="/contact" style={{ 
+                display: "block",
+                background: BRAND.gold,
+                color: BRAND.dark,
+                padding: "12px 20px",
+                borderRadius: "6px",
+                textAlign: "center",
+                fontWeight: 700,
+                textDecoration: "none"
+              }}>
+                Contact / Quote
+              </Link>
+            </div>
+          </nav>
+        </div>
+
+        <div className={`${mobileMenu ? "menu-backdrop" : ""}`} onClick={mobileMenuClose}></div>
+        {isOverlayActive && <div className="overlay" onClick={mobileMenuClose}></div>}
+      </header>
+
+      <style jsx>{`
+        @media (max-width: 991px) {
+          .desktop-nav {
+            display: none !important;
+          }
+          .mobile-nav-toggler {
+            display: block !important;
+          }
+        }
+        @media (min-width: 992px) {
+          .mobile-menu {
+            display: none !important;
+          }
+        }
+      `}</style>
+    </>
   );
 };
 
