@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Navlink from "./Navlink";
 import { usePathname } from "next/navigation";
 
 const BRAND = {
@@ -9,6 +8,12 @@ const BRAND = {
   green: "#2DBB7A",
   purple: "#4B3DBB",
   dark: "#0E0F2C",
+};
+
+const activeNavStyle = {
+  color: BRAND.purple,
+  fontWeight: 600,
+  position: "relative" as const,
 };
 
 const HeaderFour = () => {
@@ -46,11 +51,11 @@ const HeaderFour = () => {
   const QUOTE_NUMBER = "+70 264 566 579";
 
   return (
-    <header className="main-header main-header-two style4">
-      <div id="sticky-header" className={`menu-area ${scrollClassName}`}>
-        <div className="main-header-two__outer">
+    <header className="main-header main-header-two style4" style={{ background: "#fff" }}>
+      <div id="sticky-header" className={`menu-area ${scrollClassName}`} style={{ background: "#fff" }}>
+        <div className="main-header-two__outer" style={{ background: "#fff", paddingTop: 0, paddingBottom: 0 }}>
           {/* Logo */}
-          <div className="logo-box-two" style={{ paddingRight: 16, display: "flex", alignItems: "center" }}>
+          <div className="logo-box-two" style={{ paddingRight: 16, display: "flex", alignItems: "center", background: "#fff" }}>
             <Link href="/" aria-label="Home">
               <img
                 src="/img/resource/logo-6.png"
@@ -68,16 +73,18 @@ const HeaderFour = () => {
             <div className="menu-wrap" style={{ width: "100%" }}>
               <nav className="menu-nav" style={{ width: "100%" }}>
                 <div className="main-header-two__inner" style={{ width: "100%" }}>
-                  {/* Clean bar (no yellow) */}
+                  {/* Clean white navbar */}
                   <div className="main-header-two__bottom" style={{ borderTop: "none", background: "#fff" }}>
                     <div className="main-header-two__bottom-left">
                       <div className="navbar-wrap main-menu">
                         <ul className="navigation">
                           <li className={currentPath === "/" ? "active" : ""}>
-                            <Link href="/">Home</Link>
+                            <Link href="/" style={currentPath === "/" ? activeNavStyle : {}}>Home</Link>
                           </li>
 
-                          <Navlink activeClasses="active" text="About" href="/about" />
+                          <li className={currentPath === "/about" ? "active" : ""}>
+                            <Link href="/about" style={currentPath === "/about" ? activeNavStyle : {}}>About</Link>
+                          </li>
 
                           <li
                             className={
@@ -92,7 +99,22 @@ const HeaderFour = () => {
                                 : "menu-item-has-children"
                             }
                           >
-                            <Link href="#">Services</Link>
+                            <Link 
+                              href="#" 
+                              style={
+                                currentPath === "/services" ||
+                                currentPath === "/road-transport" ||
+                                currentPath === "/air-transport" ||
+                                currentPath === "/cargo-transport" ||
+                                currentPath === "/ocean-freight" ||
+                                currentPath === "/rail-transport" ||
+                                currentPath === "/warehousing"
+                                  ? activeNavStyle 
+                                  : {}
+                              }
+                            >
+                              Services
+                            </Link>
                             <ul className="sub-menu">
                               <li><Link href="/services" className={currentPath === "/services" ? "active" : ""}>Services</Link></li>
                               <li><Link href="/road-transport" className={currentPath === "/road-transport" ? "active" : ""}>Road Transport</Link></li>
@@ -114,7 +136,19 @@ const HeaderFour = () => {
                                 : "menu-item-has-children"
                             }
                           >
-                            <Link href="#">Pages</Link>
+                            <Link 
+                              href="#"
+                              style={
+                                currentPath &&
+                                (currentPath.startsWith("/team") ||
+                                  currentPath.startsWith("/projects") ||
+                                  currentPath.startsWith("/error"))
+                                  ? activeNavStyle 
+                                  : {}
+                              }
+                            >
+                              Pages
+                            </Link>
                             <ul className="sub-menu">
                               <li><Link href="/team" className={currentPath === "/team" ? "active" : ""}>Team</Link></li>
                               <li><Link href="/team-details" className={currentPath === "/team-details" ? "active" : ""}>Team Details</Link></li>
@@ -131,7 +165,16 @@ const HeaderFour = () => {
                                 : "menu-item-has-children"
                             }
                           >
-                            <Link href="#">Blog</Link>
+                            <Link 
+                              href="#"
+                              style={
+                                currentPath && currentPath.startsWith("/blog")
+                                  ? activeNavStyle 
+                                  : {}
+                              }
+                            >
+                              Blog
+                            </Link>
                             <ul className="sub-menu">
                               <li><Link href="/blog" className={currentPath === "/blog" ? "active" : ""}>Blog</Link></li>
                               <li><Link href="/blog-standard" className={currentPath === "/blog-standard" ? "active" : ""}>Blog standard</Link></li>
@@ -139,12 +182,14 @@ const HeaderFour = () => {
                             </ul>
                           </li>
 
-                          <Navlink activeClasses="active" text="Contact" href="/contact" />
+                          <li className={currentPath === "/contact" ? "active" : ""}>
+                            <Link href="/contact" style={currentPath === "/contact" ? activeNavStyle : {}}>Contact</Link>
+                          </li>
                         </ul>
                       </div>
                     </div>
 
-                    {/* CTA only */}
+                    {/* CTA Button */}
                     <div className="main-header-two__bottom-right" style={{ gap: 14 }}>
                       <Link
                         href="tel:+70264566579"
