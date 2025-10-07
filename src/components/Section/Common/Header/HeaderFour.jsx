@@ -51,11 +51,11 @@ const HeaderFour = () => {
   const QUOTE_NUMBER = "+70 264 566 579";
 
   return (
-    <header className="main-header main-header-two style4" style={{ background: "#fff", position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999 }}>
+    <header className="main-header main-header-two style4" style={{ background: "#fff", position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, boxShadow: "0 2px 10px rgba(0,0,0,0.05)" }}>
       <div id="sticky-header" className={`menu-area ${scrollClassName}`} style={{ background: "#fff", minHeight: "80px" }}>
-        <div className="main-header-two__outer" style={{ background: "#fff", paddingTop: 0, paddingBottom: 0, display: "flex", alignItems: "center", height: "80px" }}>
+        <div className="main-header-two__outer" style={{ background: "#fff", paddingTop: 0, paddingBottom: 0, display: "flex", alignItems: "center", height: "80px", overflow: "hidden" }}>
           {/* Logo */}
-          <div className="logo-box-two" style={{ paddingRight: 16, paddingLeft: 16, display: "flex", alignItems: "center", background: "#fff", height: "80px" }}>
+          <div className="logo-box-two" style={{ paddingRight: 16, paddingLeft: 16, display: "flex", alignItems: "center", background: "#fff", height: "80px", position: "relative", zIndex: 10 }}>
             <Link href="/" aria-label="Home" style={{ display: "flex", alignItems: "center", height: "100%" }}>
               <img
                 src="/img/resource/logo-6.png"
