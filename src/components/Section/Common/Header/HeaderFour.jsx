@@ -48,17 +48,7 @@ const HeaderFour = () => {
   return (
     <header className="main-header main-header-two style4">
       <div id="sticky-header" className={`menu-area ${scrollClassName}`}>
-        <div className="main-header-two__outer">
-          {/* Logo */}
-          <div className="logo-box-two" style={{ paddingRight: 16, display: "flex", alignItems: "center" }}>
-            <Link href="/" aria-label="Home">
-              <img
-                src="/img/resource/logo-6.png"
-                alt="Translo"
-                style={{ height: 56, width: "auto", maxHeight: "8vh" }}
-              />
-            </Link>
-          </div>
+
 
           <div className="menu-area__inner">
             <div className="mobile-nav-toggler" onClick={mobileMenuOpen}>
