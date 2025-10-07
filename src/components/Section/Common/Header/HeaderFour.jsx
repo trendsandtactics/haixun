@@ -32,13 +32,14 @@ const HeaderFour = () => {
   const serviceHandler = () => setService(!service);
   const pageHandler = () => setPage(!page);
 
-  const [currentPath, setCurrentPath] = useState(null);
   const pathname = usePathname();
+  const [currentPath, setCurrentPath] = useState<string | null>(null);
   useEffect(() => setCurrentPath(pathname), [pathname]);
 
   const [scrollClassName, setScrollClassName] = useState("");
   useEffect(() => {
-    const handleScroll = () => setScrollClassName(window.scrollY > 100 ? "sticky-menu" : "");
+    const handleScroll = () =>
+      setScrollClassName(window.scrollY > 100 ? "sticky-menu" : "");
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -49,122 +50,188 @@ const HeaderFour = () => {
     <header className="main-header main-header-two style4">
       <div id="sticky-header" className={`menu-area ${scrollClassName}`}>
         <div className="main-header-two__outer">
-          {/* Logo */}
-          <div className="logo-box-two" style={{ paddingRight: 16, display: "flex", alignItems: "center" }}>
-            <Link href="/" aria-label="Home">
-              <img
-                src="/img/resource/logo-6.png"
-                alt="Translo"
-                style={{ height: 56, width: "auto", maxHeight: "8vh" }}
-              />
-            </Link>
-          </div>
-
-          <div className="menu-area__inner">
-            <div className="mobile-nav-toggler" onClick={mobileMenuOpen}>
-              <i className="fas fa-bars"></i>
+          {/* NAV WRAP (with diagonal background pinned to NAV only) */}
+          <div className="nav-shelf">
+            {/* Logo (kept on top of purple shelf) */}
+            <div
+              className="logo-box-two"
+              style={{ paddingRight: 16, display: "flex", alignItems: "center", position: "relative", zIndex: 2 }}
+            >
+              <Link href="/" aria-label="Home">
+                <img
+                  src="/img/resource/logo-6.png"
+                  alt="Translo"
+                  style={{ height: 56, width: "auto", maxHeight: "8vh" }}
+                />
+              </Link>
             </div>
 
-            <div className="menu-wrap" style={{ width: "100%" }}>
-              <nav className="menu-nav" style={{ width: "100%" }}>
-                <div className="main-header-two__inner" style={{ width: "100%" }}>
-                  {/* Clean bar (no yellow) */}
-                  <div className="main-header-two__bottom" style={{ borderTop: "none", background: "#fff" }}>
-                    <div className="main-header-two__bottom-left">
-                      <div className="navbar-wrap main-menu">
-                        <ul className="navigation">
-                          <li className={currentPath === "/" ? "active" : ""}>
-                            <Link href="/">Home</Link>
-                          </li>
+            <div className="menu-area__inner">
+              <div className="mobile-nav-toggler" onClick={mobileMenuOpen}>
+                <i className="fas fa-bars"></i>
+              </div>
 
-                          <Navlink activeClasses="active" text="About" href="/about" />
+              <div className="menu-wrap" style={{ width: "100%" }}>
+                <nav className="menu-nav" style={{ width: "100%" }}>
+                  <div className="main-header-two__inner" style={{ width: "100%" }}>
+                    {/* Clean bar with our purple diagonal background */}
+                    <div className="main-header-two__bottom nav-shelf__bar">
+                      <div className="main-header-two__bottom-left">
+                        <div className="navbar-wrap main-menu">
+                          <ul className="navigation">
+                            <li className={currentPath === "/" ? "active" : ""}>
+                              <Link href="/">Home</Link>
+                            </li>
 
-                          <li
-                            className={
-                              currentPath === "/services" ||
-                              currentPath === "/road-transport" ||
-                              currentPath === "/air-transport" ||
-                              currentPath === "/cargo-transport" ||
-                              currentPath === "/ocean-freight" ||
-                              currentPath === "/rail-transport" ||
-                              currentPath === "/warehousing"
-                                ? "active menu-item-has-children"
-                                : "menu-item-has-children"
-                            }
-                          >
-                            <Link href="#">Services</Link>
-                            <ul className="sub-menu">
-                              <li><Link href="/services" className={currentPath === "/services" ? "active" : ""}>Services</Link></li>
-                              <li><Link href="/road-transport" className={currentPath === "/road-transport" ? "active" : ""}>Road Transport</Link></li>
-                              <li><Link href="/air-transport" className={currentPath === "/air-transport" ? "active" : ""}>Air Transport</Link></li>
-                              <li><Link href="/cargo-transport" className={currentPath === "/cargo-transport" ? "active" : ""}>Cargo Transport</Link></li>
-                              <li><Link href="/ocean-freight" className={currentPath === "/ocean-freight" ? "active" : ""}>Ocean Freight</Link></li>
-                              <li><Link href="/rail-transport" className={currentPath === "/rail-transport" ? "active" : ""}>Rail Transport</Link></li>
-                              <li><Link href="/warehousing" className={currentPath === "/warehousing" ? "active" : ""}>Warehousing</Link></li>
-                            </ul>
-                          </li>
+                            <Navlink activeClasses="active" text="About" href="/about" />
 
-                          <li
-                            className={
-                              currentPath &&
-                              (currentPath.startsWith("/team") ||
-                                currentPath.startsWith("/projects") ||
-                                currentPath.startsWith("/error"))
-                                ? "active menu-item-has-children"
-                                : "menu-item-has-children"
-                            }
-                          >
-                            <Link href="#">Pages</Link>
-                            <ul className="sub-menu">
-                              <li><Link href="/team" className={currentPath === "/team" ? "active" : ""}>Team</Link></li>
-                              <li><Link href="/team-details" className={currentPath === "/team-details" ? "active" : ""}>Team Details</Link></li>
-                              <li><Link href="/projects" className={currentPath === "/projects" ? "active" : ""}>Projects</Link></li>
-                              <li><Link href="/project-details" className={currentPath === "/project-details" ? "active" : ""}>Project Details</Link></li>
-                              <li><Link href="/error" className={currentPath === "/error" ? "active" : ""}>404</Link></li>
-                            </ul>
-                          </li>
+                            <li
+                              className={
+                                currentPath === "/services" ||
+                                currentPath === "/road-transport" ||
+                                currentPath === "/air-transport" ||
+                                currentPath === "/cargo-transport" ||
+                                currentPath === "/ocean-freight" ||
+                                currentPath === "/rail-transport" ||
+                                currentPath === "/warehousing"
+                                  ? "active menu-item-has-children"
+                                  : "menu-item-has-children"
+                              }
+                            >
+                              <Link href="#">Services</Link>
+                              <ul className="sub-menu">
+                                <li>
+                                  <Link href="/services" className={currentPath === "/services" ? "active" : ""}>
+                                    Services
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/road-transport" className={currentPath === "/road-transport" ? "active" : ""}>
+                                    Road Transport
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/air-transport" className={currentPath === "/air-transport" ? "active" : ""}>
+                                    Air Transport
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/cargo-transport" className={currentPath === "/cargo-transport" ? "active" : ""}>
+                                    Cargo Transport
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/ocean-freight" className={currentPath === "/ocean-freight" ? "active" : ""}>
+                                    Ocean Freight
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/rail-transport" className={currentPath === "/rail-transport" ? "active" : ""}>
+                                    Rail Transport
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/warehousing" className={currentPath === "/warehousing" ? "active" : ""}>
+                                    Warehousing
+                                  </Link>
+                                </li>
+                              </ul>
+                            </li>
 
-                          <li
-                            className={
-                              currentPath && currentPath.startsWith("/blog")
-                                ? "active menu-item-has-children"
-                                : "menu-item-has-children"
-                            }
-                          >
-                            <Link href="#">Blog</Link>
-                            <ul className="sub-menu">
-                              <li><Link href="/blog" className={currentPath === "/blog" ? "active" : ""}>Blog</Link></li>
-                              <li><Link href="/blog-standard" className={currentPath === "/blog-standard" ? "active" : ""}>Blog standard</Link></li>
-                              <li><Link href="/blog-details" className={currentPath === "/blog-details" ? "active" : ""}>Blog Details</Link></li>
-                            </ul>
-                          </li>
+                            <li
+                              className={
+                                currentPath &&
+                                (currentPath.startsWith("/team") ||
+                                  currentPath.startsWith("/projects") ||
+                                  currentPath.startsWith("/error"))
+                                  ? "active menu-item-has-children"
+                                  : "menu-item-has-children"
+                              }
+                            >
+                              <Link href="#">Pages</Link>
+                              <ul className="sub-menu">
+                                <li>
+                                  <Link href="/team" className={currentPath === "/team" ? "active" : ""}>
+                                    Team
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/team-details" className={currentPath === "/team-details" ? "active" : ""}>
+                                    Team Details
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/projects" className={currentPath === "/projects" ? "active" : ""}>
+                                    Projects
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/project-details" className={currentPath === "/project-details" ? "active" : ""}>
+                                    Project Details
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/error" className={currentPath === "/error" ? "active" : ""}>
+                                    404
+                                  </Link>
+                                </li>
+                              </ul>
+                            </li>
 
-                          <Navlink activeClasses="active" text="Contact" href="/contact" />
-                        </ul>
+                            <li
+                              className={
+                                currentPath && currentPath.startsWith("/blog")
+                                  ? "active menu-item-has-children"
+                                  : "menu-item-has-children"
+                              }
+                            >
+                              <Link href="#">Blog</Link>
+                              <ul className="sub-menu">
+                                <li>
+                                  <Link href="/blog" className={currentPath === "/blog" ? "active" : ""}>
+                                    Blog
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/blog-standard" className={currentPath === "/blog-standard" ? "active" : ""}>
+                                    Blog standard
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/blog-details" className={currentPath === "/blog-details" ? "active" : ""}>
+                                    Blog Details
+                                  </Link>
+                                </li>
+                              </ul>
+                            </li>
+
+                            <Navlink activeClasses="active" text="Contact" href="/contact" />
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* CTA only */}
+                      <div className="main-header-two__bottom-right" style={{ gap: 14 }}>
+                        <Link
+                          href="tel:+70264566579"
+                          className="btn-box"
+                          style={{
+                            padding: "12px 18px",
+                            borderRadius: 999,
+                            background: `linear-gradient(90deg, ${BRAND.purple} 0%, ${BRAND.green} 60%, ${BRAND.teal} 100%)`,
+                            color: "#fff",
+                            fontWeight: 700,
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          Get a Free Quote: {QUOTE_NUMBER}
+                          <span className="icon-right-arrow" style={{ marginLeft: 8 }}></span>
+                        </Link>
                       </div>
                     </div>
-
-                    {/* CTA only */}
-                    <div className="main-header-two__bottom-right" style={{ gap: 14 }}>
-                      <Link
-                        href="tel:+70264566579"
-                        className="btn-box"
-                        style={{
-                          padding: "12px 18px",
-                          borderRadius: 999,
-                          background: `linear-gradient(90deg, ${BRAND.purple} 0%, ${BRAND.green} 60%, ${BRAND.teal} 100%)`,
-                          color: "#fff",
-                          fontWeight: 700,
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        Get a Free Quote: {QUOTE_NUMBER}
-                        <span className="icon-right-arrow" style={{ marginLeft: 8 }}></span>
-                      </Link>
-                    </div>
                   </div>
-                </div>
-              </nav>
+                </nav>
+              </div>
             </div>
           </div>
 
@@ -191,7 +258,7 @@ const HeaderFour = () => {
                     <div className="dropdown-btn" onClick={() => setHome(!home)}><span className="fas fa-angle-down"></span></div>
                   </li>
 
-                  <li style={{ marginTop: home ? "0px" : "-134px", zIndex: home ? "999" : "", transition: "0.3s linear" }}>
+                  <li style={{ marginTop: home ? "0px" : "-134px", zIndex: home ? 999 : undefined, transition: "0.3s linear" }}>
                     <Link href="about">About</Link>
                   </li>
 
@@ -209,7 +276,7 @@ const HeaderFour = () => {
                     <div className="dropdown-btn" onClick={serviceHandler}><span className="fas fa-angle-down"></span></div>
                   </li>
 
-                  <li className="menu-item-has-children" style={{ marginTop: service ? "0px" : "-314px", zIndex: service ? "0" : "999", transition: "0.3s linear" }}>
+                  <li className="menu-item-has-children" style={{ marginTop: service ? "0px" : "-314px", zIndex: service ? 0 : 999, transition: "0.3s linear" }}>
                     <Link href="#">Pages</Link>
                     <ul className="sub-menu">
                       <li><Link href="team">Team</Link></li>
@@ -221,9 +288,9 @@ const HeaderFour = () => {
                     <div className="dropdown-btn" onClick={pageHandler}><span className="fas fa-angle-down"></span></div>
                   </li>
 
-                  <li className="menu-item-has-children" style={{ marginTop: page ? "0px" : "-224px", zIndex: page ? "0" : "99999", transition: "0.3s linear" }}>
+                  <li className="menu-item-has-children" style={{ marginTop: page ? "0px" : "-224px", zIndex: page ? 0 : 99999, transition: "0.3s linear" }}>
                     <Link href="#">Blog</Link>
-                    <ul className="sub-menu" style={{ opacity: blog ? "1" : "0" }}>
+                    <ul className="sub-menu" style={{ opacity: blog ? 1 : 0 }}>
                       <li><Link href="blog">Blog</Link></li>
                       <li><Link href="blog-standard">Blog standard</Link></li>
                       <li><Link href="blog-details">Blog Details</Link></li>
@@ -231,7 +298,7 @@ const HeaderFour = () => {
                     <div className="dropdown-btn" onClick={() => setBlog(!blog)}><span className="fas fa-angle-down"></span></div>
                   </li>
 
-                  <li style={{ marginTop: blog ? "0px" : "-134px", zIndex: "99999", transition: "0.3s linear" }}>
+                  <li style={{ marginTop: blog ? "0px" : "-134px", zIndex: 99999, transition: "0.3s linear" }}>
                     <Link href="contact">Contact</Link>
                   </li>
                 </ul>
@@ -248,6 +315,106 @@ const HeaderFour = () => {
           {isOverlayActive && <div className="overlay" onClick={mobileMenuClose}></div>}
         </div>
       </div>
+
+      {/* Styles to pin diagonal to NAV, and replace all yellows with purple */}
+      <style jsx>{`
+        /* Container that the diagonal belongs to */
+        .nav-shelf {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        /* The white bar that holds the nav links/cta */
+        .nav-shelf__bar {
+          position: relative;
+          border-top: none;
+          background: #fff;
+          z-index: 1;
+        }
+
+        /* Diagonal band: attached to nav area ONLY, not whole header */
+        .nav-shelf::before {
+          content: "";
+          position: absolute;
+          inset: 0 auto 0 0;
+          width: min(260px, 26vw);
+          background: ${BRAND.purple};
+          /* diagonal shape */
+          clip-path: polygon(0 0, 100% 0, 72% 100%, 0% 100%);
+          z-index: 0;
+          pointer-events: none;
+          transition: transform 0.25s ease;
+        }
+
+        /* When sticky, it stays with the navbar because it's part of .nav-shelf */
+        .sticky-menu .nav-shelf::before {
+          transform: translateZ(0);
+        }
+
+        /* Bring logo/links above the shelf */
+        .logo-box-two,
+        .main-header-two__bottom-left,
+        .main-header-two__bottom-right {
+          position: relative;
+          z-index: 2;
+        }
+
+        /* Replace common theme yellows with purple without touching your design tokens */
+        /* If your theme used yellow borders/underlines for active/hover */
+        .navigation > li > a:hover,
+        .navigation > li.active > a,
+        .navigation > li.current > a {
+          color: ${BRAND.purple} !important;
+        }
+
+        /* Typical underline/indicator overrides (if theme uses ::after) */
+        .navigation > li > a::after,
+        .navigation > li.active > a::after,
+        .navigation > li.current > a::after {
+          background: ${BRAND.purple} !important;
+          border-color: ${BRAND.purple} !important;
+        }
+
+        /* Dropdown caret / small accents that used to be yellow */
+        .menu-item-has-children > a .fas,
+        .dropdown-btn span {
+          color: ${BRAND.purple} !important;
+        }
+
+        /* Mobile menu active/hover color swap */
+        .mobile-menu .navigation li > a:hover,
+        .mobile-menu .navigation li.active > a {
+          color: ${BRAND.purple} !important;
+        }
+
+        /* If any gradient bars in theme were yellow, harmonize to purple */
+        .main-header-two .header-lower .outer-box::before,
+        .main-header-two__bottom::before {
+          background: ${BRAND.purple} !important;
+        }
+
+        /* Submenu hover highlight */
+        .sub-menu li > a:hover,
+        .sub-menu li > a.active {
+          color: ${BRAND.purple} !important;
+        }
+
+        /* Optional: make focus rings match purple for accessibility */
+        a:focus-visible,
+        button:focus-visible {
+          outline: 2px solid ${BRAND.purple};
+          outline-offset: 2px;
+        }
+
+        @media (max-width: 991px) {
+          .nav-shelf::before {
+            width: 200px;
+            clip-path: polygon(0 0, 100% 0, 68% 100%, 0% 100%);
+          }
+        }
+      `}</style>
     </header>
   );
 };
