@@ -3,28 +3,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Navlink from "./Navlink";
 import { usePathname } from "next/navigation";
-import Select from "react-select";
 
 // Brand colors from your logo
 const BRAND = {
   teal: "#26B6E0",
   green: "#2DBB7A",
   purple: "#4B3DBB",
-  dark: "#1E1B4B",
 };
 
-const options = [
-  { value: "EN1", label: "EN" },
-  { value: "EN2", label: "FR" },
-  { value: "EN3", label: "GER" },
-  { value: "EN4", label: "BAN" },
-];
-
 const HeaderFour = () => {
-  const initialSelected = options.find((option) => option.label === "EN");
-  const [selected, setSelected] = useState(initialSelected);
-  const handleChange = (selectedOption) => setSelected(selectedOption);
-
   const [mobileMenu, setMobileMenu] = useState(false);
   const [home, setHome] = useState(false);
   const [service, setService] = useState(false);
@@ -37,13 +24,11 @@ const HeaderFour = () => {
     setIsOverlayActive(true);
     document.body.classList.add("disable-scroll");
   };
-
   const mobileMenuClose = () => {
     setMobileMenu(false);
     setIsOverlayActive(false);
     document.body.classList.remove("disable-scroll");
   };
-
   const serviceHandler = () => setService(!service);
   const pageHandler = () => setPage(!page);
 
@@ -61,29 +46,31 @@ const HeaderFour = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Search Popup
-  const [isActive, setIsActive] = useState(false);
-  const togglePopup = () => {
-    setIsActive(!isActive);
-    document.body.classList.toggle("locked");
-  };
-
-  function preloader() {}
-  if (typeof window !== "undefined") {
-    window.onload = () => {
-      preloader();
-    };
-  }
-
   const QUOTE_NUMBER = "+70 264 566 579";
 
   return (
     <header className="main-header main-header-two style4">
       <div id="sticky-header" className={`menu-area ${scrollClassName}`}>
         <div className="main-header-two__outer">
-          <div className="logo-box-two" style={{ paddingRight: 16 }}>
-            <Link href="/">
-              <img src="/img/resource/logo-6.png" alt="Logo" />
+          {/* --- Bigger Logo --- */}
+          <div
+            className="logo-box-two"
+            style={{
+              paddingRight: 16,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Link href="/" aria-label="Home">
+              <img
+                src="/img/resource/logo-6.png"
+                alt="Logo"
+                style={{
+                  height: 64,         // desktop size
+                  width: "auto",
+                  maxHeight: "8vh",
+                }}
+              />
             </Link>
           </div>
 
@@ -95,7 +82,7 @@ const HeaderFour = () => {
             <div className="menu-wrap" style={{ width: "100%" }}>
               <nav className="menu-nav" style={{ width: "100%" }}>
                 <div className="main-header-two__inner" style={{ width: "100%" }}>
-                  {/* Top bar removed */}
+                  {/* Top bar removed earlier */}
 
                   <div
                     className="main-header-two__bottom"
@@ -188,58 +175,8 @@ const HeaderFour = () => {
                       </div>
                     </div>
 
+                    {/* Right side: CTA only (search & language removed) */}
                     <div className="main-header-two__bottom-right" style={{ gap: 14 }}>
-                      <div className="search-box">
-                        <Link
-                          href="#"
-                          className="main-menu__search search-toggler icon-magnifying-glass"
-                          onClick={togglePopup}
-                          aria-label="Open search"
-                          title="Search"
-                        />
-                      </div>
-
-                      <div className="main-header__language-switcher">
-                        <div className="select-box clearfix" id="select-box-home-two">
-                          <Select
-                            className="selectmenu wide"
-                            options={options}
-                            value={selected}
-                            onChange={handleChange}
-                            styles={{
-                              control: (provided) => ({
-                                ...provided,
-                                width: "100%",
-                                height: 44,
-                                fontSize: 14,
-                                borderRadius: 8,
-                                borderColor: "transparent",
-                                boxShadow: "none",
-                                backgroundColor: "#ffffff",
-                              }),
-                              singleValue: (p) => ({
-                                ...p,
-                                color: BRAND.dark,
-                                fontWeight: 600,
-                              }),
-                              option: (provided, state) => ({
-                                ...provided,
-                                color: "#fff",
-                                fontWeight: 500,
-                                minHeight: 36,
-                                cursor: "pointer",
-                                backgroundColor: state.isSelected
-                                  ? BRAND.purple
-                                  : state.isFocused
-                                  ? BRAND.green
-                                  : BRAND.teal,
-                              }),
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Replaced phone block with one CTA that shows the quote number */}
                       <Link
                         href={`tel:${QUOTE_NUMBER.replace(/\s+/g, "")}`}
                         className="btn-box"
@@ -262,22 +199,28 @@ const HeaderFour = () => {
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* --- Mobile Menu --- */}
           <div className={`mobile-menu ${mobileMenu ? "mobile-menu-open" : ""}`}>
             <nav className="menu-box">
               <div className={`close-btn ${mobileMenu ? "rotate" : ""}`} onClick={mobileMenuClose}>
                 <i className="fas fa-times"></i>
               </div>
 
-              <div className="nav-logo">
-                <Link href="/"><img src="/img/resource/mobile-menu-logo3.png" alt="Logo" /></Link>
+              <div className="nav-logo" style={{ display: "flex", alignItems: "center" }}>
+                <Link href="/" aria-label="Home">
+                  <img
+                    src="/img/resource/mobile-menu-logo3.png"
+                    alt="Logo"
+                    style={{ height: 54, width: "auto" }}
+                  />
+                </Link>
               </div>
 
               <div className="menu-outer">
                 <ul className="navigation">
                   <li className="active menu-item-has-children">
                     <Link href="#">Home</Link>
-                    <ul className={`sub-menu ${home ? "sub-menu-visible test" : "sub-menu-hidden"}`} style={{ zIndex: home ? "0" : "" }}>
+                    <ul className={`sub-menu ${home ? "sub-menu-visible test" : "sub-menu-hidden"}`}>
                       <li style={{ borderTop: "1px solid #0000001a" }}><Link href="/">Home One</Link></li>
                       <li style={{ borderTop: "1px solid #0000001a" }}><Link href="home-2">Home Two</Link></li>
                       <li style={{ borderTop: "1px solid #0000001a" }}><Link href="home-3">Home Three</Link></li>
@@ -331,7 +274,7 @@ const HeaderFour = () => {
                 </ul>
               </div>
 
-              {/* Mobile CTA with number */}
+              {/* Mobile CTA */}
               <div className="contact-info" style={{ backgroundColor: "white", zIndex: 99999 }}>
                 <div className="icon-box">
                   <span className="icon-right-arrow"></span>
@@ -345,24 +288,6 @@ const HeaderFour = () => {
 
           <div className={`${mobileMenu ? "menu-backdrop" : ""}`} onClick={mobileMenuClose}></div>
           {isOverlayActive && <div className="overlay" onClick={mobileMenuClose}></div>}
-        </div>
-      </div>
-
-      {/* Search */}
-      <div className={`search-popup ${isActive ? "active" : ""}`} id="home-two">
-        <div className="search-popup__overlay search-toggler" onClick={togglePopup}>
-          <div className="search-popup__close-icon">
-            <span className="icon-plus"></span>
-          </div>
-        </div>
-        <div className="search-popup__content">
-          <form action="#">
-            <label htmlFor="search" className="sr-only">search here</label>
-            <input type="text" id="search" placeholder="Search Here..." />
-            <button type="submit" aria-label="search submit" className="btn-box">
-              <i className="icon-magnifying-glass"></i>
-            </button>
-          </form>
         </div>
       </div>
     </header>
