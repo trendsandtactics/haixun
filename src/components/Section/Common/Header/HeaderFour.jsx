@@ -13,7 +13,7 @@ const BRAND = {
 const activeNavStyle = {
   color: BRAND.purple,
   fontWeight: 600,
-  position: "relative" as const,
+  position: "relative",
 };
 
 const HeaderFour = () => {
