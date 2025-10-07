@@ -1,5 +1,5 @@
 import Footer from "~/components/Section/Common/Footer";
-import HeaderFour from "~/components/Section/Common/HeaderFour";
+import { HeaderFour } from "~/components/Section/Common/Header";
 import About from "~/components/Section/Home-1/About";
 import Blog from "~/components/Section/Home-1/Blog";
 import ChooseUs from "~/components/Section/Home-1/ChooseUs/ChooseUs";
