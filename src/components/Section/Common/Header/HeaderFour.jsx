@@ -152,7 +152,7 @@ const HeaderFour = () => {
                                         <div className="main-header-two__bottom-left">
                                             <div className="navbar-wrap main-menu">
                                                 <ul className="navigation">
-                                                    <li className=""><Link href="#">Home</Link>
+                                                    <li className=""><Link href="/">Home</Link>
                                                      
                                                     </li>
                                                     <Navlink
