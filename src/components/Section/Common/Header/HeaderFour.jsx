@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 
 const BRAND = {
   teal: "#26B6E0",
-  green: "#2DBB7A",
-  purple: "#4B3DBB",
   dark: "#0E0F2C",
   navy: "#1a365d",
   gold: "#FDB913",
@@ -25,7 +23,7 @@ const HeaderFour = () => {
   useEffect(() => setCurrentPath(pathname), [pathname]);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 100);
+    const handleScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -42,12 +40,8 @@ const HeaderFour = () => {
     document.body.classList.remove("disable-scroll");
   };
 
-  const serviceHandler = () => setService(!service);
-  const pageHandler = () => setPage(!page);
-
   return (
     <>
-      {/* HEADER */}
       <header
         style={{
           background: "#fff",
@@ -55,58 +49,69 @@ const HeaderFour = () => {
           position: "sticky",
           top: 0,
           zIndex: 1000,
-          boxShadow: scrolled ? "0 2px 10px rgba(0,0,0,0.1)" : "none",
+          boxShadow: scrolled ? "0 2px 10px rgba(0,0,0,0.08)" : "none",
           transition: "box-shadow 0.3s ease",
         }}
       >
         <div
           style={{
-            maxWidth: "1400px",
+            maxWidth: "1240px",          // tighter container
             margin: "0 auto",
-            padding: "0 20px",
+            padding: "0 16px",           // less side padding
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            height: "80px",
+            gap: 12,
+            height: "72px",              // slightly shorter header
           }}
         >
-          {/* LOGO + TAGLINE */}
+          {/* LEFT: Logo + tagline (compact) */}
           <Link
             href="/"
             aria-label="Home"
-            style={{ display: "flex", alignItems: "center", textDecoration: "none" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              textDecoration: "none",
+              minWidth: 0,
+            }}
           >
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <img
-                src="/img/resource/logo-6.png"
-                alt="Translo"
-                style={{ height: 52, width: "auto" }}
-              />
-              <span
-                style={{
-                  fontSize: 12,
-                  color: "#6b7280",
-                  letterSpacing: "0.04em",
-                  textTransform: "uppercase",
-                  fontWeight: 600,
-                  marginTop: 4,
-                }}
-              >
-                driving sustainability
-              </span>
-            </div>
+            <img
+              src="/img/resource/logo-6.png"
+              alt="Moltech"
+              style={{ height: 40, width: "auto" }}   // smaller logo
+            />
+            <span
+              className="tagline"
+              style={{
+                fontSize: 10,
+                color: "#6b7280",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                fontWeight: 700,
+                lineHeight: 1,
+                marginTop: 2,
+                whiteSpace: "nowrap",
+              }}
+            >
+              driving sustainability
+            </span>
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
-          <nav style={{ display: "flex", alignItems: "center", gap: 30 }} className="desktop-nav">
-            <HeaderLink href="/" currentPath={currentPath}>
-              Home
-            </HeaderLink>
-
-            <HeaderLink href="/about" currentPath={currentPath}>
-              About Us
-            </HeaderLink>
-
+          {/* MIDDLE: Nav (pull closer to logo) */}
+          <nav
+            className="desktop-nav"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 18,                // tighter gap between items
+              marginLeft: 12,         // small offset from logo
+              flex: 1,                // takes available space so right btns hug right
+              minWidth: 0,
+            }}
+          >
+            <HeaderLink href="/" currentPath={currentPath}>Home</HeaderLink>
+            <HeaderLink href="/about" currentPath={currentPath}>About Us</HeaderLink>
             <HeaderLink
               href="/services"
               currentPath={
@@ -119,7 +124,6 @@ const HeaderFour = () => {
             >
               Services
             </HeaderLink>
-
             <HeaderLink
               href="/projects"
               currentPath={
@@ -132,62 +136,63 @@ const HeaderFour = () => {
             >
               Pages
             </HeaderLink>
-
             <HeaderLink
               href="/blog"
               currentPath={currentPath?.includes("/blog") ? "/blog" : currentPath}
             >
               Blog
             </HeaderLink>
-
-            <HeaderLink href="/contact" currentPath={currentPath}>
-              Contact
-            </HeaderLink>
+            <HeaderLink href="/contact" currentPath={currentPath}>Contact</HeaderLink>
           </nav>
 
-          {/* RIGHT BUTTONS */}
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          {/* RIGHT: Controls (compact + responsive) */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <button
+              className="btn-country"
               style={{
                 background: BRAND.navy,
                 color: "#fff",
                 border: "none",
-                borderRadius: 6,
-                padding: "10px 16px",
-                fontSize: 14,
+                borderRadius: 8,
+                padding: "8px 12px",
+                fontSize: 13,
                 fontWeight: 600,
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
                 cursor: "pointer",
+                lineHeight: 1,
               }}
             >
-              🌐 Switch Country ▼
+              🌐 Switch Country ▾
             </button>
 
             <Link
               href="/contact"
+              className="btn-cta"
               style={{
                 background: BRAND.gold,
                 color: BRAND.dark,
-                borderRadius: 6,
-                padding: "10px 20px",
-                fontSize: 14,
-                fontWeight: 700,
+                borderRadius: 8,
+                padding: "9px 14px",
+                fontSize: 13,
+                fontWeight: 800,
                 textDecoration: "none",
                 display: "flex",
                 alignItems: "center",
-                boxShadow: "0 2px 8px rgba(253,185,19,0.35)",
+                lineHeight: 1,
+                boxShadow: "0 2px 8px rgba(253,185,19,0.28)",
               }}
             >
               Contact / Quote
             </Link>
 
-            {/* MOBILE MENU TOGGLER */}
+            {/* Mobile toggler */}
             <div
               className="mobile-nav-toggler"
               onClick={mobileMenuOpen}
               style={{ display: "none", fontSize: 26, color: BRAND.dark, cursor: "pointer" }}
+              aria-label="Open menu"
             >
               ☰
             </div>
@@ -197,32 +202,30 @@ const HeaderFour = () => {
         {/* MOBILE MENU */}
         <div className={`mobile-menu ${mobileMenu ? "mobile-menu-open" : ""}`}>
           <nav className="menu-box">
-            <div className="close-btn" onClick={mobileMenuClose}>
-              ×
-            </div>
+            <div className="close-btn" onClick={mobileMenuClose} aria-label="Close menu">×</div>
 
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: 20 }}>
-              <img src="/img/resource/logo-6.png" alt="Logo" style={{ height: 48, width: "auto" }} />
+            <div style={{ display: "flex", alignItems: "center", gap: 10, padding: 16 }}>
+              <img src="/img/resource/logo-6.png" alt="Moltech" style={{ height: 36, width: "auto" }} />
               <span
                 style={{
-                  fontSize: 11,
+                  fontSize: 10,
                   color: "#6b7280",
-                  letterSpacing: "0.04em",
+                  letterSpacing: "0.08em",
                   textTransform: "uppercase",
-                  fontWeight: 600,
-                  marginTop: 4,
+                  fontWeight: 700,
                 }}
               >
                 driving sustainability
               </span>
             </div>
 
-            <ul className="navigation" style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <ul className="navigation">
               <li><Link href="/" onClick={mobileMenuClose}>Home</Link></li>
               <li><Link href="/about" onClick={mobileMenuClose}>About Us</Link></li>
+
               <li>
-                <button className="dropdown-row" onClick={serviceHandler}>
-                  Services <span>▼</span>
+                <button className="dropdown-row" onClick={() => setService(!service)}>
+                  Services <span>▾</span>
                 </button>
                 {service && (
                   <ul className="sub-menu">
@@ -236,9 +239,10 @@ const HeaderFour = () => {
                   </ul>
                 )}
               </li>
+
               <li>
-                <button className="dropdown-row" onClick={pageHandler}>
-                  Pages <span>▼</span>
+                <button className="dropdown-row" onClick={() => setPage(!page)}>
+                  Pages <span>▾</span>
                 </button>
                 {page && (
                   <ul className="sub-menu">
@@ -249,9 +253,10 @@ const HeaderFour = () => {
                   </ul>
                 )}
               </li>
+
               <li>
                 <button className="dropdown-row" onClick={() => setBlog(!blog)}>
-                  Blog <span>▼</span>
+                  Blog <span>▾</span>
                 </button>
                 {blog && (
                   <ul className="sub-menu">
@@ -260,97 +265,91 @@ const HeaderFour = () => {
                   </ul>
                 )}
               </li>
+
               <li><Link href="/contact" onClick={mobileMenuClose}>Contact</Link></li>
             </ul>
+
+            <div style={{ padding: 16 }}>
+              <Link href="/contact" onClick={mobileMenuClose} className="btn-cta" style={{
+                display: "block",
+                textAlign: "center",
+                background: BRAND.gold,
+                color: BRAND.dark,
+                borderRadius: 8,
+                padding: "10px 14px",
+                fontSize: 13,
+                fontWeight: 800,
+                textDecoration: "none",
+              }}>
+                Contact / Quote
+              </Link>
+            </div>
           </nav>
         </div>
 
-        {isOverlayActive && <div className="overlay" onClick={mobileMenuClose}></div>}
+        {isOverlayActive && <div className="overlay" onClick={mobileMenuClose} />}
       </header>
 
-      {/* STYLES */}
       <style jsx>{`
-        @media (max-width: 991px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-nav-toggler {
-            display: block !important;
-          }
+        /* Desktop hide / Mobile show */
+        @media (max-width: 1024px) {
+          .desktop-nav { gap: 14px !important; }
+          .btn-country { display: none !important; } /* hide country button earlier */
+          .btn-cta { padding: 8px 12px !important; font-size: 12px !important; }
         }
-        @media (min-width: 992px) {
-          .mobile-menu {
-            display: none !important;
-          }
+        @media (max-width: 900px) {
+          .desktop-nav { display: none !important; }
+          .mobile-nav-toggler { display: block !important; }
         }
+        @media (min-width: 901px) {
+          .mobile-menu { display: none !important; }
+        }
+
+        /* Links */
         .nav-link {
+          position: relative;
           text-decoration: none;
           color: ${BRAND.dark};
           font-weight: 500;
           font-size: 15px;
-          transition: color 0.3s ease;
-          position: relative;
+          transition: color 0.25s ease;
+          white-space: nowrap;
         }
-        .nav-link:hover {
-          color: ${BRAND.teal};
+        .nav-link:hover { color: ${BRAND.teal}; }
+        .nav-link.active { color: ${BRAND.teal}; font-weight: 600; }
+        .nav-link.active::after {
+          content: "";
+          position: absolute;
+          left: 0; right: 0; bottom: -8px;
+          height: 2px; background: ${BRAND.teal}; border-radius: 2px;
         }
-        .nav-link.active {
-          color: ${BRAND.teal};
-          font-weight: 600;
-        }
+
+        /* Mobile menu shell */
         .mobile-menu {
           position: fixed;
-          top: 0;
-          right: -100%;
-          height: 100vh;
-          width: 85%;
-          max-width: 380px;
+          top: 0; right: -100%;
+          height: 100vh; width: 86%; max-width: 360px;
           background: #fff;
-          transition: right 0.3s ease;
+          box-shadow: -8px 0 24px rgba(0,0,0,0.12);
+          transition: right 0.28s ease;
           z-index: 1200;
-          overflow-y: auto;
-          padding: 20px;
-        }
-        .mobile-menu-open {
-          right: 0;
-        }
-        .close-btn {
-          font-size: 28px;
-          cursor: pointer;
-          text-align: right;
-          padding-right: 10px;
-        }
-        .overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.4);
-          z-index: 1100;
-        }
-        .dropdown-row {
-          background: none;
-          border: none;
-          padding: 12px 0;
-          width: 100%;
-          text-align: left;
-          font-size: 15px;
-          cursor: pointer;
-          color: ${BRAND.dark};
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        .sub-menu {
-          padding-left: 15px;
-          list-style: none;
-          margin: 0;
-        }
-        .sub-menu li a {
           display: block;
-          padding: 8px 0;
-          text-decoration: none;
-          color: ${BRAND.dark};
-          font-size: 14px;
         }
+        .mobile-menu-open { right: 0; }
+        .menu-box { display: flex; flex-direction: column; height: 100%; }
+        .close-btn { font-size: 28px; line-height: 1; padding: 14px 16px; cursor: pointer; align-self: flex-end; }
+        .navigation { list-style: none; padding: 0 16px 16px; margin: 0; }
+        .navigation > li { border-bottom: 1px solid #f1f5f9; }
+        .navigation a, .dropdown-row {
+          display: flex; justify-content: space-between; align-items: center;
+          width: 100%; padding: 12px 0; text-decoration: none;
+          color: ${BRAND.dark}; background: transparent; border: none;
+          font-size: 15px; font-weight: 500; cursor: pointer;
+        }
+        .sub-menu { list-style: none; padding: 0 0 10px 12px; margin: 0; background: #fafafa; }
+        .sub-menu li a { padding: 10px 0; font-size: 14px; display: block; }
+
+        .overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.45); z-index: 1100; }
       `}</style>
     </>
   );
