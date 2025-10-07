@@ -7,12 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Link from "next/link";
 
-const COLORS = {
-  teal: "#25B4E6",
-  green: "#28C58C",
-  violet: "#493FAD",
-  white: "#FFFFFF",
-};
+const BRAND_TEAL = "#26B6E0";
 
 const Hero = () => {
   return (
@@ -24,6 +19,7 @@ const Hero = () => {
         effect="fade"
         pagination={{
           el: "#main-slider-pagination",
+          type: "bullets",
           clickable: true,
         }}
         navigation={{
@@ -34,40 +30,38 @@ const Hero = () => {
         modules={[Autoplay, Pagination, Navigation, EffectFade]}
       >
         <div className="swiper-wrapper">
-          {/* 01 — Driving Sustainability */}
+          {/* Slide 01 — DRIVING SUSTAINABILITY */}
           <SwiperSlide className="swiper-slide">
             <div
               className="image-layer"
-              style={{ backgroundImage: "url(/img/slider/sustainability.jpg)" }}
-            />
+              style={{
+                backgroundImage: "url(/img/slider/sustainability.jpg)",
+              }}
+            ></div>
+
             <div className="big-title">
-              <h2 style={{ color: COLORS.violet }}>Driving Sustainability</h2>
+              <h2>Driving Sustainability</h2>
             </div>
+
             <div className="container">
               <div className="main-slider-one__single padding">
                 <div className="main-slider-one__content">
-                  <h3 style={{ color: COLORS.teal }}>
+                  <h3 style={{ color: BRAND_TEAL }}>
                     <span>01.</span> Driving Sustainability
                   </h3>
                   <h2>
-                    Reduce <span style={{ color: COLORS.teal }}>carbon footprint</span> <br />
-                    with smart innovation
+                    Building a <span style={{ color: BRAND_TEAL }}>balanced</span> <br />
+                    eco system
                   </h2>
                   <p>
-                    We reduce greenhouse gas emissions through products that build a balanced ecosystem.
-                    Full traceability is enabled with technology in line with EU sustainability directives.
+                    To reduce carbon footprint and greenhouse gas emissions through products that
+                    create a balanced ecosystem. Effective use of technology for full traceability is
+                    applied in accordance with EU sustainability directives.
                   </p>
                   <div className="btn-box">
-                    <Link
-                      className="thm-btn"
-                      href="/tracking"
-                      style={{
-                        background: `linear-gradient(90deg, ${COLORS.teal}, ${COLORS.green})`,
-                        color: COLORS.white,
-                      }}
-                    >
+                    <Link className="thm-btn" href="/tracking">
                       <span className="txt">Tracking</span>
-                      <i className="icon-right-arrow" />
+                      <i className="icon-right-arrow"></i>
                     </Link>
                   </div>
                 </div>
@@ -75,41 +69,39 @@ const Hero = () => {
             </div>
           </SwiperSlide>
 
-          {/* 02 — Biodiesel Feedstock */}
+          {/* Slide 02 — BIODIESEL FEEDSTOCK */}
           <SwiperSlide className="swiper-slide">
             <div
               className="image-layer"
-              style={{ backgroundImage: "url(/img/slider/feedstock.jpg)" }}
-            />
+              style={{
+                backgroundImage: "url(/img/slider/feedstock.jpg)",
+              }}
+            ></div>
+
             <div className="big-title">
-              <h2 style={{ color: COLORS.violet }}>Biodiesel Feedstock</h2>
+              <h2>Biodiesel Feedstock</h2>
             </div>
+
             <div className="container">
               <div className="main-slider-one__single padding">
                 <div className="main-slider-one__content">
-                  <h3 style={{ color: COLORS.teal }}>
+                  <h3 style={{ color: BRAND_TEAL }}>
                     <span>02.</span> Biodiesel Feedstock
                   </h3>
                   <h2>
-                    Turning waste into <br />
-                    <span style={{ color: COLORS.teal }}>renewable energy</span>
+                    Origination with <br />
+                    <span style={{ color: BRAND_TEAL }}>technology</span> and expertise
                   </h2>
                   <p>
-                    We originate sustainable feedstocks using technology, skilled manpower, and a global
-                    logistics platform. Collected used cooking oil is processed and routed to bio-refineries
-                    to become clean biofuel.
+                    Sustainable feedstock origination using advanced technology, skilled manpower,
+                    and our in-house global logistics platform makes Moltech the preferred choice for
+                    generators and oil refineries. Used cooking oil collected and processed finds its
+                    way to bio-refineries for conversion into renewable biofuel.
                   </p>
                   <div className="btn-box">
-                    <Link
-                      className="thm-btn"
-                      href="/tracking"
-                      style={{
-                        background: `linear-gradient(90deg, ${COLORS.teal}, ${COLORS.green})`,
-                        color: COLORS.white,
-                      }}
-                    >
+                    <Link className="thm-btn" href="/tracking">
                       <span className="txt">Tracking</span>
-                      <i className="icon-right-arrow" />
+                      <i className="icon-right-arrow"></i>
                     </Link>
                   </div>
                 </div>
@@ -117,40 +109,38 @@ const Hero = () => {
             </div>
           </SwiperSlide>
 
-          {/* 03 — Trust */}
+          {/* Slide 03 — TRUST */}
           <SwiperSlide className="swiper-slide">
             <div
               className="image-layer"
-              style={{ backgroundImage: "url(/img/slider/trust.jpg)" }}
-            />
+              style={{
+                backgroundImage: "url(/img/slider/trust.jpg)",
+              }}
+            ></div>
+
             <div className="big-title">
-              <h2 style={{ color: COLORS.violet }}>Trust</h2>
+              <h2>Trust</h2>
             </div>
+
             <div className="container">
               <div className="main-slider-one__single padding">
                 <div className="main-slider-one__content">
-                  <h3 style={{ color: COLORS.teal }}>
+                  <h3 style={{ color: BRAND_TEAL }}>
                     <span>03.</span> Trust
                   </h3>
                   <h2>
-                    Built on <span style={{ color: COLORS.teal }}>integrity</span> <br />
-                    and strong partnerships
+                    Strong <span style={{ color: BRAND_TEAL }}>partnerships</span> <br />
+                    built on integrity
                   </h2>
                   <p>
-                    We treat trading partners as a team—open communication, transparency, strong work
-                    ethics, and strict quality control—making Moltech a trusted partner worldwide.
+                    We treat our trading partners as part of our team — with open communication,
+                    transparency, strong work ethics, and strict quality control. These principles make
+                    Moltech one of the most trusted partners in global trade.
                   </p>
                   <div className="btn-box">
-                    <Link
-                      className="thm-btn"
-                      href="/about"
-                      style={{
-                        background: `linear-gradient(90deg, ${COLORS.teal}, ${COLORS.green})`,
-                        color: COLORS.white,
-                      }}
-                    >
+                    <Link className="thm-btn" href="/about">
                       <span className="txt">Learn More</span>
-                      <i className="icon-right-arrow" />
+                      <i className="icon-right-arrow"></i>
                     </Link>
                   </div>
                 </div>
@@ -159,29 +149,20 @@ const Hero = () => {
           </SwiperSlide>
         </div>
 
-        {/* Pagination & Nav (no TS cast here) */}
-        <div
-          className="swiper-pagination"
-          id="main-slider-pagination"
-          style={{
-            ["--swiper-pagination-color"]: COLORS.teal,
-            ["--swiper-pagination-bullet-inactive-color"]: "#ccc",
-          }}
-        />
+        {/* Pagination & Nav */}
+        <div className="swiper-pagination" id="main-slider-pagination"></div>
         <div className="main-slider__nav">
           <div
             className="swiper-button-prev"
             id="main-slider__swiper-button-prev"
-            style={{ color: COLORS.teal }}
           >
-            <i className="fa fa-angle-left" aria-hidden="true" />
+            <i className="fa fa-angle-left" aria-hidden="true"></i>
           </div>
           <div
             className="swiper-button-next"
             id="main-slider__swiper-button-next"
-            style={{ color: COLORS.teal }}
           >
-            <i className="fa fa-angle-right" aria-hidden="true" />
+            <i className="fa fa-angle-right" aria-hidden="true"></i>
           </div>
         </div>
       </Swiper>
