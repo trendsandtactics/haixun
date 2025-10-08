@@ -1,350 +1,381 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-const BRAND = {
-  teal: "#26B6E0",
-  green: "#2DBB7A",
-  purple: "#4B3DBB",
-  dark: "#0E0F2C",
-  navy: "#1a365d",
-  gold: "#FDB913",
-};
 
-const activeNavStyle = {
-  color: BRAND.teal,
-  fontWeight: 600,
-  position: "relative",
-};
-
-const HeaderFour = () => {
-  const [mobileMenu, setMobileMenu] = useState(false);
-  const [service, setService] = useState(false);
-  const [page, setPage] = useState(false);
-  const [blog, setBlog] = useState(false);
-  const [isOverlayActive, setIsOverlayActive] = useState(false);
-
-  const mobileMenuOpen = () => {
-    setMobileMenu(true);
-    setIsOverlayActive(true);
-    document.body.classList.add("disable-scroll");
-  };
-  const mobileMenuClose = () => {
-    setMobileMenu(false);
-    setIsOverlayActive(false);
-    document.body.classList.remove("disable-scroll");
-  };
-  const serviceHandler = () => setService(!service);
-  const pageHandler = () => setPage(!page);
-
-  const [currentPath, setCurrentPath] = useState(null);
-  const pathname = usePathname();
-  useEffect(() => setCurrentPath(pathname), [pathname]);
-
-  const [scrollClassName, setScrollClassName] = useState("");
-  useEffect(() => {
-    const handleScroll = () => setScrollClassName(window.scrollY > 100 ? "sticky-menu" : "");
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const QUOTE_NUMBER = "+70 264 566 579";
-
-  return (
-    <>
-      {/* Top Bar */}
-      <div style={{ 
-        background: "#fff", 
-        borderBottom: "1px solid #e5e7eb",
-        padding: "8px 0"
-      }}>
-        <div style={{ 
-          maxWidth: "1400px", 
-          margin: "0 auto", 
-          padding: "0 20px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          fontSize: "13px",
-          color: "#6b7280"
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span>A venture of</span>
-            <img src="/img/resource/logo-6.png" alt="Global" style={{ height: "20px" }} />
-            <span>Enterprises, Singapore</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header */}
-      <header style={{ 
-        background: "#fff", 
-        borderBottom: "1px solid #e5e7eb",
-        position: "sticky",
-        top: 0,
-        zIndex: 1000,
-        boxShadow: scrollClassName ? "0 2px 10px rgba(0,0,0,0.08)" : "none",
-        transition: "box-shadow 0.3s ease"
-      }}>
-        <div style={{ 
-          maxWidth: "1400px", 
-          margin: "0 auto", 
-          padding: "0 20px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: "70px"
-        }}>
-          {/* Logo */}
-          <Link href="/" aria-label="Home" style={{ display: "flex", alignItems: "center" }}>
-            <img
-              src="/img/resource/logo-6.png"
-              alt="Translo"
-              style={{ height: "50px", width: "auto" }}
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav style={{ display: "flex", alignItems: "center", gap: "32px" }} className="desktop-nav">
-            <Link 
-              href="/" 
-              style={{ 
-                textDecoration: "none", 
-                color: currentPath === "/" ? BRAND.teal : BRAND.dark,
-                fontWeight: currentPath === "/" ? 600 : 500,
-                fontSize: "15px",
-                transition: "color 0.3s ease"
-              }}
-            >
-              Home
-            </Link>
-
-            <Link 
-              href="/about" 
-              style={{ 
-                textDecoration: "none", 
-                color: currentPath === "/about" ? BRAND.teal : BRAND.dark,
-                fontWeight: currentPath === "/about" ? 600 : 500,
-                fontSize: "15px",
-                transition: "color 0.3s ease"
-              }}
-            >
-              About Us
-            </Link>
-
-            <div style={{ position: "relative" }} className="dropdown-parent">
-              <Link 
-                href="/services" 
-                style={{ 
-                  textDecoration: "none", 
-                  color: currentPath?.includes("/services") || currentPath?.includes("-transport") || currentPath?.includes("warehousing") ? BRAND.teal : BRAND.dark,
-                  fontWeight: currentPath?.includes("/services") ? 600 : 500,
-                  fontSize: "15px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "4px"
-                }}
-              >
-                Services
-                <span style={{ fontSize: "10px" }}>▼</span>
-              </Link>
-            </div>
-
-            <div style={{ position: "relative" }} className="dropdown-parent">
-              <Link 
-                href="/projects" 
-                style={{ 
-                  textDecoration: "none", 
-                  color: currentPath?.includes("/team") || currentPath?.includes("/project") || currentPath?.includes("/error") ? BRAND.teal : BRAND.dark,
-                  fontWeight: currentPath?.includes("/team") || currentPath?.includes("/project") ? 600 : 500,
-                  fontSize: "15px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "4px"
-                }}
-              >
-                Pages
-                <span style={{ fontSize: "10px" }}>▼</span>
-              </Link>
-            </div>
-
-            <Link 
-              href="/blog" 
-              style={{ 
-                textDecoration: "none", 
-                color: currentPath?.includes("/blog") ? BRAND.teal : BRAND.dark,
-                fontWeight: currentPath?.includes("/blog") ? 600 : 500,
-                fontSize: "15px",
-                transition: "color 0.3s ease"
-              }}
-            >
-              Blog
-            </Link>
-
-            <Link 
-              href="/contact" 
-              style={{ 
-                textDecoration: "none", 
-                color: currentPath === "/contact" ? BRAND.teal : BRAND.dark,
-                fontWeight: currentPath === "/contact" ? 600 : 500,
-                fontSize: "15px",
-                transition: "color 0.3s ease"
-              }}
-            >
-              Contact
-            </Link>
-          </nav>
-
-          {/* Right Side Buttons */}
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            {/* Switch Country Button */}
-            <button style={{
-              background: BRAND.navy,
-              color: "#fff",
-              border: "none",
-              borderRadius: "6px",
-              padding: "10px 20px",
-              fontSize: "14px",
-              fontWeight: 600,
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              cursor: "pointer",
-              transition: "background 0.3s ease"
-            }}>
-              <span style={{ fontSize: "18px" }}>🌐</span>
-              Switch Country
-              <span style={{ fontSize: "10px" }}>▼</span>
-            </button>
-
-            {/* Contact/Quote Button */}
-            <Link
-              href="/contact"
-              style={{
-                background: BRAND.gold,
-                color: BRAND.dark,
-                border: "none",
-                borderRadius: "6px",
-                padding: "10px 24px",
-                fontSize: "14px",
-                fontWeight: 700,
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-                whiteSpace: "nowrap",
-                transition: "transform 0.2s ease, box-shadow 0.3s ease",
-                boxShadow: "0 2px 8px rgba(253, 185, 19, 0.3)"
-              }}
-            >
-              Contact / Quote
-            </Link>
-
-            {/* Mobile Menu Toggle */}
-            <div 
-              className="mobile-nav-toggler" 
-              onClick={mobileMenuOpen}
-              style={{
-                display: "none",
-                cursor: "pointer",
-                fontSize: "24px",
-                color: BRAND.dark
-              }}
-            >
-              <i className="fas fa-bars"></i>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className={`mobile-menu ${mobileMenu ? "mobile-menu-open" : ""}`}>
-          <nav className="menu-box">
-            <div className={`close-btn ${mobileMenu ? "rotate" : ""}`} onClick={mobileMenuClose}>
-              <i className="fas fa-times"></i>
-            </div>
-            <div className="nav-logo" style={{ display: "flex", alignItems: "center", padding: "20px" }}>
-              <Link href="/" aria-label="Home">
-                <img src="/img/resource/logo-6.png" alt="Translo Mobile" style={{ height: 50, width: "auto" }} />
-              </Link>
-            </div>
-            <div className="menu-outer">
-              <ul className="navigation">
-                <li><Link href="/">Home</Link></li>
-                <li><Link href="/about">About Us</Link></li>
-                <li className="menu-item-has-children">
-                  <Link href="#">Services</Link>
-                  <ul className="sub-menu">
-                    <li><Link href="/services">Services</Link></li>
-                    <li><Link href="/road-transport">Road Transport</Link></li>
-                    <li><Link href="/air-transport">Air Transport</Link></li>
-                    <li><Link href="/cargo-transport">Cargo Transport</Link></li>
-                    <li><Link href="/ocean-freight">Ocean Freight</Link></li>
-                    <li><Link href="/rail-transport">Rail Transport</Link></li>
-                    <li><Link href="/warehousing">Warehousing</Link></li>
-                  </ul>
-                  <div className="dropdown-btn" onClick={serviceHandler}><span className="fas fa-angle-down"></span></div>
-                </li>
-                <li className="menu-item-has-children">
-                  <Link href="#">Pages</Link>
-                  <ul className="sub-menu">
-                    <li><Link href="/team">Team</Link></li>
-                    <li><Link href="/team-details">Team Details</Link></li>
-                    <li><Link href="/projects">Projects</Link></li>
-                    <li><Link href="/project-details">Project Details</Link></li>
-                    <li><Link href="/error">404</Link></li>
-                  </ul>
-                  <div className="dropdown-btn" onClick={pageHandler}><span className="fas fa-angle-down"></span></div>
-                </li>
-                <li className="menu-item-has-children">
-                  <Link href="#">Blog</Link>
-                  <ul className="sub-menu">
-                    <li><Link href="/blog">Blog</Link></li>
-                    <li><Link href="/blog-standard">Blog standard</Link></li>
-                    <li><Link href="/blog-details">Blog Details</Link></li>
-                  </ul>
-                  <div className="dropdown-btn" onClick={() => setBlog(!blog)}><span className="fas fa-angle-down"></span></div>
-                </li>
-                <li><Link href="/contact">Contact</Link></li>
-              </ul>
-            </div>
-            <div className="contact-info" style={{ backgroundColor: "white", padding: "20px" }}>
-              <Link href="/contact" style={{ 
-                display: "block",
-                background: BRAND.gold,
-                color: BRAND.dark,
-                padding: "12px 20px",
-                borderRadius: "6px",
-                textAlign: "center",
-                fontWeight: 700,
-                textDecoration: "none"
-              }}>
-                Contact / Quote
-              </Link>
-            </div>
-          </nav>
-        </div>
-
-        <div className={`${mobileMenu ? "menu-backdrop" : ""}`} onClick={mobileMenuClose}></div>
-        {isOverlayActive && <div className="overlay" onClick={mobileMenuClose}></div>}
-      </header>
-
-      <style jsx>{`
-        @media (max-width: 991px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-nav-toggler {
-            display: block !important;
-          }
+const Header = () => {
+    const [mobileMenu, setMobileMenu] = useState(false);
+    const [home, setHome] = useState(false);
+    const [service, setService] = useState(false);
+    const [page, setPage] = useState(false);
+    const [blog, setBlog] = useState(false);
+    const [scrollClassName, setScrollClassName] = useState("");
+    const [isOverlayActive, setIsOverlayActive] = useState(false);
+  
+    const mobileMenuOpen = () => {
+      setMobileMenu(true);
+      setIsOverlayActive(true);
+      document.body.classList.add('disable-scroll');
+    };
+  
+    const mobileMenuClose = () => {
+      setMobileMenu(false);
+      setIsOverlayActive(false);
+      document.body.classList.remove('disable-scroll');
+    };
+  
+    const serviceHandler = () => {
+      setService(!service);
+    };
+  
+    const pageHandler = () => {
+      setPage(!page);
+    };
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 100) {
+          setScrollClassName("sticky-menu");
+        } else {
+          setScrollClassName("");
         }
-        @media (min-width: 992px) {
-          .mobile-menu {
-            display: none !important;
-          }
-        }
-      `}</style>
-    </>
-  );
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+  
+    const [isActive, setIsActive] = useState(false);
+  
+    const togglePopup = () => {
+      setIsActive(!isActive);
+      document.body.classList.toggle('locked');
+    };
+  
+    function preloader() {
+      // Implementation of the preloader function
+    }
+  
+    if (typeof window !== 'undefined') {
+      window.onload = () => {
+        preloader();
+      };
+    }
+
+    return (
+        <header className="main-header main-header-one">
+            <div id="sticky-header" className={`menu-area ${scrollClassName}`}>
+                <div className="main-header-one__outer">
+                    <div className="logo-box-one">
+                        <div
+                            className="logo-box-one__bg"
+                            style={{
+                                backgroundImage: "url(/img/pattern/logo-box-one-pattern.png)"
+                            }}
+                        ></div>
+                        <Link href="/"><img src="/img/resource/logo-1.png" alt="Logo" /></Link>
+                    </div>
+                    <div className="main-header-one__right">
+                        <div className="container">
+                            <div className="menu-area__inner">
+                                <div className="mobile-nav-toggler" onClick={mobileMenuOpen}>
+                                    <i className="fas fa-bars"></i>
+                                </div>
+                                <div className="menu-wrap">
+                                    <nav className="menu-nav">
+                                        <div className="main-header-one__inner">
+                                            <div className="main-header-one__top">
+                                                <div
+                                                    className="main-header-one__top-pattern"
+                                                    style={{
+                                                        backgroundImage: "url(/img/pattern/header-pattern.png)"
+                                                    }}
+                                                ></div>
+                                                <div className="main-header-one__top-inner">
+                                                    <div className="main-header-one__top-left">
+                                                        <div className="header-contact-info">
+                                                            <ul>
+                                                                <li>
+                                                                    <div className="icon-box">
+                                                                        <span className="icon-pin"></span>
+                                                                    </div>
+                                                                    <p>Jones Street, New York, USA</p>
+                                                                </li>
+                                                                <li>
+                                                                    <div className="icon-box">
+                                                                        <span className="icon-paper-plane"></span>
+                                                                    </div>
+                                                                    <p>
+                                                                        <Link href="mailto:yourmail@email.com">Info@example.com</Link>
+                                                                    </p>
+                                                                </li>
+                                                                <li>
+                                                                    <div className="icon-box">
+                                                                        <span className="icon-out-call"></span>
+                                                                    </div>
+                                                                    <p>
+                                                                        <Link href="tel:123456789">+70 264 566 579</Link>
+                                                                    </p>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div className="main-header-one__top-right">
+                                                        <div className="inner">
+                                                            <div className="header-social-links">
+                                                                <ul>
+                                                                    <li>
+                                                                        <Link href="#"><span className="icon-facebook"></span></Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="#"><span className="icon-twitter"></span></Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="#"><span className="icon-instagram"></span></Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="#"><span className="icon-linkedin"></span></Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="main-header-one__bottom">
+                                                <div className="main-header-one__bottom-left">
+                                                    <div className="navbar-wrap main-menu">
+                                                        <ul className="navigation">
+                                                            <li className="active menu-item-has-children">
+                                                                <Link href="#">Home</Link>
+                                                                <ul className="sub-menu">
+                                                                    <li><Link href="/">Home One</Link></li>
+                                                                    <li><Link href="home-2">Home Two</Link></li>
+                                                                    <li>
+                                                                        <Link href="home-3">Home Three</Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><Link href="about">About</Link></li>
+                                                            <li className="menu-item-has-children">
+                                                                <Link href="#">Services</Link>
+                                                                <ul className="sub-menu">
+                                                                    <li>
+                                                                        <Link href="services">Services</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="road-transport">Road Transport</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="air-transport">Air Transport</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="cargo-transport">Cargo Transport</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="ocean-freight">Ocean Freight</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="rail-transport">Rail Transport</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="warehousing">Warehousing</Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li className="menu-item-has-children">
+                                                                <Link href="#">Pages</Link>
+                                                                <ul className="sub-menu">
+                                                                    <li><Link href="team">Team</Link></li>
+                                                                    <li>
+                                                                        <Link href="team-details">Team Details</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="projects">Projects</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="project-details">Project Details</Link>
+                                                                    </li>
+                                                                    <li><Link href="not-found">404</Link></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li className="menu-item-has-children">
+                                                                <Link href="#">Blog</Link>
+                                                                <ul className="sub-menu">
+                                                                    <li><Link href="blog">Blog</Link></li>
+                                                                    <li>
+                                                                        <Link href="blog-standard">Blog standard</Link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <Link href="blog-details">Blog Details</Link>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li><Link href="contact">Contact</Link></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div className="main-header-one__bottom-right">
+                                                    <div className="search-box">
+                                                        <Link href="#" className="main-menu__search search-toggler icon-magnifying-glass" onClick={togglePopup}></Link>
+                                                    </div>
+                                                    <div className="btn-box">
+                                                        <Link className="thm-btn" href="contact">
+                                                            <span className="txt">Get Free Quote</span>
+                                                            <i className="icon-right-arrow"></i>
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+
+                            {/* <!-- Mobile Menu  --> */}
+                            <div className={`mobile-menu ${mobileMenu ? "mobile-menu-open" : ""}`}>
+                                <nav className="menu-box">
+                                    <div className={`close-btn ${mobileMenu ? "rotate" : ""}`} onClick={mobileMenuClose} ><i className="fas fa-times"></i></div>
+                                    <div className="nav-logo">
+                                        <Link href="/"><img src="/img/resource/mobile-menu-logo3.png" /></Link>
+                                    </div>
+                                    <div className="menu-outer">
+                                        <ul className="navigation">
+                                            <li className="active menu-item-has-children">
+                                                <Link href="#">Home</Link>
+                                                <ul className={`sub-menu ${home ? "sub-menu-visible test" : "sub-menu-hidden"}`}
+                                                    style={{ zIndex: `${home ? "0" : ""}` }}
+                                                >
+                                                    <li style={{ borderTop: `${home ? "1px solid #0000001a" : "1px solid #0000001a"}` }}><Link href="/">Home One</Link></li>
+                                                    <li style={{ borderTop: `${home ? "1px solid #0000001a" : "1px solid #0000001a"}` }}><Link href="home-2">Home Two</Link></li>
+                                                    <li style={{ borderTop: `${home ? "1px solid #0000001a" : "1px solid #0000001a"}` }}><Link href="home-3">Home Three</Link></li>
+                                                </ul>
+                                                <div className="dropdown-btn" onClick={() => setHome(!home)}><span className="fas fa-angle-down"></span></div></li>
+                                            <li style={{ marginTop: `${home ? "0px" : "-134px"}`, zIndex: `${home ? "999" : ""}`, transition: "0.3s linear" }}><Link href="about">About</Link></li>
+                                            <li className="menu-item-has-children">
+                                                <Link href="#">Services</Link>
+                                                <ul className="sub-menu">
+                                                    <li>
+                                                        <Link href="services">Services</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="road-transport">Road Transport</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="air-transport">Air Transport</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="cargo-transport">Cargo Transport</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="ocean-freight">Ocean Freight</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="rail-transport">Rail Transport</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="warehousing">Warehousing</Link>
+                                                    </li>
+                                                </ul>
+                                                <div className="dropdown-btn" onClick={serviceHandler}><span className="fas fa-angle-down"></span></div>
+                                                {/* onClick={()=>setService(!service)} */}
+                                            </li>
+                                            <li className="menu-item-has-children"
+                                                style={{ marginTop: `${service ? "0px" : "-314px"}`, zIndex: `${service ? "0" : "999"}`, transition: "0.3s linear" }}
+                                            >
+                                                <Link href="#">Pages</Link>
+                                                <ul className="sub-menu">
+                                                    <li><Link href="team">Team</Link></li>
+                                                    <li>
+                                                        <Link href="team-details">Team Details</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="projects">Projects</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="project-details">Project Details</Link>
+                                                    </li>
+                                                    <li><Link href="error">404</Link></li>
+                                                </ul>
+                                                <div className="dropdown-btn" onClick={pageHandler}><span className="fas fa-angle-down"></span></div>
+                                                {/* onClick={()=>setPage(!page)} */}
+                                            </li>
+                                            <li className="menu-item-has-children"
+                                                style={{ marginTop: `${page ? "0px" : "-224px"}`, zIndex: `${page ? "0" : "99999"}`, transition: "0.3s linear" }}
+                                            >
+                                                <Link href="#">Blog</Link>
+                                                <ul className="sub-menu" style={{ opacity: `${blog ? "1" : "0"}` }}>
+                                                    <li><Link href="blog">Blog</Link></li>
+                                                    <li>
+                                                        <Link href="blog-standard">Blog standard</Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link href="blog-details">Blog Details</Link>
+                                                    </li>
+                                                </ul>
+                                                <div className="dropdown-btn" onClick={() => setBlog(!blog)}><span className="fas fa-angle-down"></span></div>
+                                            </li>
+                                            <li style={{ marginTop: `${blog ? "0px" : "-134px"}`, zIndex: `${blog ? "99999" : "99999"}`, transition: "0.3s linear" }}>
+                                                <Link href="contact">Contact</Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="contact-info" style={{ backgroundColor: "white", zIndex: "99999" }}>
+                                        <div className="icon-box" Name>
+                                            <span className="icon-telephone-handle-silhouette"></span>
+                                        </div>
+                                        <p><Link href="tel:123456789">(629) 555-0129</Link></p>
+                                    </div>
+                                    <div className="social-links" style={{ backgroundColor: "white", zIndex: "99999" }}>
+                                        <ul className="clearfix list-wrap" style={{ backgroundColor: "white", zIndex: "99999" }}>
+                                            <li>
+                                                <Link href="#"><i className="fab fa-facebook-f"></i></Link>
+                                            </li>
+                                            <li>
+                                                <Link href="#"><i className="fab fa-twitter"></i></Link>
+                                            </li>
+                                            <li>
+                                                <Link href="#"><i className="fab fa-instagram"></i></Link>
+                                            </li>
+                                            <li>
+                                                <Link href="#"><i className="fab fa-linkedin-in"></i></Link>
+                                            </li>
+                                            <li>
+                                                <Link href="#"><i className="fab fa-youtube"></i></Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div className={` ${mobileMenu ? "menu-backdrop" : ""}`} onClick={mobileMenuClose}></div>
+                            {isOverlayActive && <div className="overlay" onClick={mobileMenuClose}></div>}
+              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={`search-popup ${isActive ? 'active' : ''}`} id='home-one'>
+                <div className="search-popup__overlay search-toggler" onClick={togglePopup}>
+                    <div className="search-popup__close-icon">
+                        <span className="icon-plus"></span>
+                    </div>
+                </div>
+                <div className="search-popup__content">
+                    <form action="#">
+                        <label htmlFor="search" className="sr-only">search here</label>
+                        <input type="text" id="search" placeholder="Search Here..." />
+                        <button type="submit" aria-label="search submit" className="btn-box">
+                            <i className="icon-magnifying-glass"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </header>
+    );
 };
 
-export default HeaderFour;
+export default Header;
